@@ -2,9 +2,6 @@
 command = "emmet-language-server"
 args = ["--stdio"]
 
-[language-server.asm-lsp]
-command = "asm-lsp"
-
 [language-server.gopls.config]
 gofumpt = true
 
