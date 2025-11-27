@@ -1,0 +1,256 @@
+#!/bin/sh
+
+# variables
+set $mod Mod4
+
+font pango:Inconsolata 8
+
+set $refresh_i3status killall -SIGUSR1 i3status
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
+set $ws21 "21"
+set $ws22 "22"
+set $ws23 "23"
+set $ws24 "24"
+set $ws25 "25"
+set $ws26 "26"
+set $ws27 "27"
+set $ws28 "28"
+set $ws29 "29"
+set $ws30 "30"
+
+floating_modifier $mod
+
+tiling_drag modifier titlebar
+
+hide_edge_borders smart
+default_border pixel 1
+default_floating_border pixel 1
+
+## colour scheme
+set $clr_bg  #282828
+set $clr_txt #ffffff
+set $clr_urg #e45461
+set $clr_blk #000000
+set $clr_foc #0a0a0a
+set $clr_ac  #7f9fbf
+
+client.focused           $clr_blk $clr_foc $clr_txt $clr_bg $clr_txt
+client.focused_inactive  $clr_blk $clr_foc $clr_txt $clr_bg $clr_txt
+client.unfocused         $clr_blk $clr_blk #777777  $clr_bg $clr_blk
+client.urgent            $clr_blk $clr_urg $clr_blk $clr_blk $clr_blk
+
+## input config
+exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Natural Scrolling Enabled" 1
+exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Tapping Enabled" 1
+exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Accel Profile Enabled" 0 1 0
+
+# bullshit
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec Thunar
+bindsym $mod+d exec --no-startup-id rofi -show drun -drun-display-format {name}
+bindsym $mod+p exec rofi -show rofi-power-menu -modes "rofi-power-menu:~/.local/bin/rofi-power-menu"
+bindsym $mod+period exec rofi -modes emoji -show emoji
+
+bindsym $mod+q kill
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Control+space focus mode_toggle
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+a focus parent
+
+bindsym Print exec --no-startup-id "maim -u | xclip -selection clipboard -t image/png"
+bindsym Shift+Print exec --no-startup-id fish -c 'maim -su /home/kit/Pictures/Screenshots/Screenshot\ @\ $(date).png'
+bindsym $mod+Print exec --no-startup-id "maim -su | xclip -selection clipboard -t image/png"
+bindsym $mod+Shift+Print exec --no-startup-id fish -c 'maim -u /home/kit/Pictures/Screenshots/Screenshot\ @\ $(date).png'
+
+bindsym $mod+End exec --no-startup-id light-locker-command -l
+bindsym $mod+Home exec --no-startup-id hibernate-prompt
+bindsym $mod+Shift+Home exec --no-startup-id hibernate-ram-prompt
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+## mullvad is a piece of shit
+bindsym $mod+Mod1+r exec --no-startup-id mullvad reconnect
+
+# hw keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
+bindsym $mod+XF86AudioMute exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 50% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+
+### outputs to That Fucking Path because i have a service that reads from that & sets the backlight level.
+### no restoration makes you desperate.
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 2.5 && light -G > /etc/backlight_level
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 2.5 && light -G > /etc/backlight_level
+
+# navigation
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# the shame of a lifetime
+## switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+## bit excessive
+bindsym $mod+Mod1+1 workspace number $ws11
+bindsym $mod+Mod1+2 workspace number $ws12
+bindsym $mod+Mod1+3 workspace number $ws13
+bindsym $mod+Mod1+4 workspace number $ws14
+bindsym $mod+Mod1+5 workspace number $ws15
+bindsym $mod+Mod1+6 workspace number $ws16
+bindsym $mod+Mod1+7 workspace number $ws17
+bindsym $mod+Mod1+8 workspace number $ws18
+bindsym $mod+Mod1+9 workspace number $ws19
+bindsym $mod+Mod1+0 workspace number $ws20
+## what the fuck
+bindsym $mod+Control+Mod1+1 workspace number $ws21
+bindsym $mod+Control+Mod1+2 workspace number $ws22
+bindsym $mod+Control+Mod1+3 workspace number $ws23
+bindsym $mod+Control+Mod1+4 workspace number $ws24
+bindsym $mod+Control+Mod1+5 workspace number $ws25
+bindsym $mod+Control+Mod1+6 workspace number $ws26
+bindsym $mod+Control+Mod1+7 workspace number $ws27
+bindsym $mod+Control+Mod1+8 workspace number $ws28
+bindsym $mod+Control+Mod1+9 workspace number $ws29
+bindsym $mod+Control+Mod1+0 workspace number $ws30
+## move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+## yup
+bindsym $mod+Shift+Mod1+1 move container to workspace number $ws11
+bindsym $mod+Shift+Mod1+2 move container to workspace number $ws12
+bindsym $mod+Shift+Mod1+3 move container to workspace number $ws13
+bindsym $mod+Shift+Mod1+4 move container to workspace number $ws14
+bindsym $mod+Shift+Mod1+5 move container to workspace number $ws15
+bindsym $mod+Shift+Mod1+6 move container to workspace number $ws16
+bindsym $mod+Shift+Mod1+7 move container to workspace number $ws17
+bindsym $mod+Shift+Mod1+8 move container to workspace number $ws18
+bindsym $mod+Shift+Mod1+9 move container to workspace number $ws19
+bindsym $mod+Shift+Mod1+0 move container to workspace number $ws20
+## EEYUP
+bindsym $mod+Control+Shift+Mod1+1 move container to workspace number $ws21
+bindsym $mod+Control+Shift+Mod1+2 move container to workspace number $ws22
+bindsym $mod+Control+Shift+Mod1+3 move container to workspace number $ws23
+bindsym $mod+Control+Shift+Mod1+4 move container to workspace number $ws24
+bindsym $mod+Control+Shift+Mod1+5 move container to workspace number $ws25
+bindsym $mod+Control+Shift+Mod1+6 move container to workspace number $ws26
+bindsym $mod+Control+Shift+Mod1+7 move container to workspace number $ws27
+bindsym $mod+Control+Shift+Mod1+8 move container to workspace number $ws28
+bindsym $mod+Control+Shift+Mod1+9 move container to workspace number $ws29
+bindsym $mod+Control+Shift+Mod1+0 move container to workspace number $ws30
+
+# modes
+mode "resize" {
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# status bar
+bar {
+    status_command i3status
+    separator_symbol "⛧"
+
+    colors {
+        background #000000CF
+        statusline #ffffff
+        focused_workspace   $clr_ac  $clr_ac  $clr_txt
+        active_workspace    $clr_blk $clr_blk $clr_txt
+        inactive_workspace  $clr_blk $clr_blk $clr_txt
+        urgent_workspace    $clr_blk $clr_urg $clr_blk
+    }
+}
+
+# services and autostart
+exec --no-startup-id gentoo-pipewire-launcher restart
+exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
+
+## i don't know if this shit actually does anything but i don't care.
+exec --no-startup-id dbus-update-activation-environment --all
+exec --no-startup-id gnome-keyring-daemon --start --components=secrets
+exec --no-startup-id export $(gnome-keyring-daemon)
+
+exec --no-startup-id fastcompmgr
+exec --no-startup-id dunst
+exec --no-startup-id light-locker
+#### insert your preferred wallpaper application of choice here; they all suck.
+exec --no-startup-id dex --autostart --environment i3
+
+exec --no-startup-id nm-applet
+
+## mpd is at the bottom because it is fucking shit
+exec --no-startup-id mpd
+exec --no-startup-id mpdscribble
