@@ -1,0 +1,74 @@
+[language-server.emmet-ls]
+command = "emmet-language-server"
+args = ["--stdio"]
+
+[language-server.asm-lsp]
+command = "asm-lsp"
+
+[language-server.gopls.config]
+gofumpt = true
+
+[[language]]
+name = "html"
+language-servers = ["vscode-html-language-server", "emmet-ls"]
+grammar = "html"
+formatter = { command = "deno", args = ["fmt", "--quiet", "--ext", "html", "-"] }
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "javascript"
+scope = "source.js"
+file-types = ["js", "mjs", "cjs"]
+formatter = { command = "deno", args = ["fmt", "--quiet", "--ext", "js", "-"] }
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "typescript"
+scope = "source.ts"
+file-types = ["ts", "mts", "cts"]
+formatter = { command = "deno", args = ["fmt", "--quiet", "--ext", "ts", "-"] }
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "css"
+language-servers = ["vscode-css-language-server", "emmet-ls"]
+grammar = "css"
+formatter = { command = "deno", args = ["fmt", "--quiet", "--ext", "css", "-"] }
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "scss"
+language-servers = ["vscode-css-language-server"]
+grammar = "scss"
+formatter = { command = "deno", args = ["fmt", "--quiet", "--ext", "scss", "-"] }
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "markdown"
+formatter = { command = "deno", args = ["fmt", "--quiet", "--ext", "md", "-"] }
+auto-format = true
+
+[[language]]
+name = "go"
+auto-format = true
+
+[[language]]
+name = "c"
+language-servers = ["clangd"]
+formatter = { command = "clang-format", args = ["-style=file", "-assume-filename=program.c"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "xml"
+formatter = { command = "xmllint", args = ["--format", "-"] }
+auto-format = false
+
+[[language]]
+name = "c-sharp"
+# language-servers = ["csharp-ls"]
+auto-format = true
