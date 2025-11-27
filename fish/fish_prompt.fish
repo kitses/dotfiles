@@ -1,3 +1,4 @@
+# go set the fucking colours yourself i don't care
 function fish_prompt
     set -l last_status $status
     if test $last_status -eq 1 -o $last_status -eq 130
