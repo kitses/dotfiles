@@ -1,0 +1,18 @@
+#!/sbin/openrc-run
+
+description="Nix multi-user daemon"
+command="/nix/var/nix/profiles/default/bin/nix-daemon"
+command_background="yes"
+pidfile="/run/${RC_SVCNAME}.pid"
+
+depend() {
+    need localmount
+    use  net
+    after bootmisc
+}
+
+start_pre() {
+    checkpath --directory --owner root:root --mode 0755 . /nix/var/nix/daemon-socket
+}
+
+

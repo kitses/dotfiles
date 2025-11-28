@@ -1,0 +1,35 @@
+[font]
+normal = { family = "Inconsolata", style = "Regular" }
+size = 5
+[window]
+dimensions = { columns = 120, lines = 30 }
+dynamic_padding = true
+opacity = 0.81
+dynamic_title = true
+[cursor]
+style = { shape = "beam" }
+[colors.primary]
+background = "#000000"
+foreground = "#ffffff"
+bright_foreground = "#ffffff"
+[colors.normal]
+black = "#353535"
+red = "#e64569"
+green = "#89d287"
+yellow = "#dab752"
+blue = "#439ecf"
+magenta = "#d961dc"
+cyan = "#64aaaf"
+white = "#ffffff"
+[colors.bright]
+black = "#535353"
+red = "#e4859a"
+green = "#a2cca1"
+yellow = "#e1e387"
+blue = "#6fbbe2"
+magenta = "#e586e7"
+cyan = "#96dcda"
+white = "#ffffff"
+[bell]
+duration = 200
+color = "#ed1f67"
