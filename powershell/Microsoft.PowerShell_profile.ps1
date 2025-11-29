@@ -16,5 +16,5 @@
 
   $dirName = Split-Path -Path $PWD -Leaf
 
-  return "$currentColor$dirName$colorReset ❄ "
+  return "$currentColor$dirName$colorReset <^)#)))≤ "
 }
