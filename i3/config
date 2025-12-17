@@ -84,9 +84,9 @@ bindsym $mod+e layout toggle split
 bindsym $mod+a focus parent
 
 bindsym Print exec --no-startup-id "maim -u | xclip -selection clipboard -t image/png"
-bindsym Shift+Print exec --no-startup-id fish -c 'maim -su /home/kit/Pictures/Screenshots/Screenshot\ @\ $(date).png'
+bindsym Shift+Print exec --no-startup-id sh -c 'maim -su "/home/kit/Pictures/Screenshots/Screenshot @ $(date).png"'
 bindsym $mod+Print exec --no-startup-id "maim -su | xclip -selection clipboard -t image/png"
-bindsym $mod+Shift+Print exec --no-startup-id fish -c 'maim -u /home/kit/Pictures/Screenshots/Screenshot\ @\ $(date).png'
+bindsym $mod+Shift+Print exec --no-startup-id sh -c 'maim -u "/home/kit/Pictures/Screenshots/Screenshot @ $(date).png"'
 
 bindsym $mod+End exec --no-startup-id light-locker-command -l
 bindsym $mod+Home exec --no-startup-id hibernate-prompt
