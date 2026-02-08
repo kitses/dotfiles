@@ -67,7 +67,7 @@
   },
   "tray": {
     "icon-size": 12,
-    "spacing": 10
+    "spacing": 4
   },
   "custom/sep": {
     "format": "/",
