@@ -23,7 +23,9 @@
   },
   "sway/window": {
     "format": "{title}",
-    "format-empty": "nothing"
+    "rewrite": {
+      "^$": "nothing"
+    }
   },
   "battery": {
     "interval": 10,
