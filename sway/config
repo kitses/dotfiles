@@ -1,0 +1,265 @@
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dex --autostart --environment sway
+seat seat0 xcursor_theme Adwaita 24
+
+# variables
+set $mod Mod4
+
+font pango:Input Mono Compressed Extra-Condensed 8
+
+set $refresh_i3status killall -SIGUSR1 i3status
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
+set $ws21 "21"
+set $ws22 "22"
+set $ws23 "23"
+set $ws24 "24"
+set $ws25 "25"
+set $ws26 "26"
+set $ws27 "27"
+set $ws28 "28"
+set $ws29 "29"
+set $ws30 "30"
+
+# configuration
+## window mechanics and decos
+floating_modifier $mod normal
+
+tiling_drag enable
+
+hide_edge_borders smart
+default_border pixel 1
+default_floating_border pixel 1
+
+## colour scheme
+set $clr_bg  #282828
+set $clr_txt #ffffff
+set $clr_urg #e45461
+set $clr_blk #000000
+set $clr_foc #0a0a0a
+set $clr_ac  #4a019c
+
+client.focused           $clr_blk $clr_foc $clr_txt $clr_bg $clr_txt
+client.focused_inactive  $clr_blk $clr_foc $clr_txt $clr_bg $clr_txt
+client.unfocused         $clr_blk $clr_blk #777777  $clr_bg $clr_blk
+client.urgent            $clr_blk $clr_urg $clr_blk $clr_blk $clr_blk
+
+## input config
+input type:touchpad {
+    natural_scroll enabled
+    tap enabled
+    accel_profile flat
+}
+
+input "1133:49292:Logitech_G_PRO_Gaming_Mouse" {
+    accel_profile "flat"
+    pointer_accel 0
+}
+
+## wallpaper
+# output * bg [INSERT IMAGE HERE] fill #000000
+
+## font rendering
+output * subpixel none
+
+# gamma correction (if needed)
+exec gammastep -g 1.0:1.0:1.16 -O 6500
+
+# bullshit
+bindsym $mod+Return exec foot
+bindsym $mod+Shift+Return exec Thunar
+bindsym $mod+d exec rofi -show drun -drun-display-format {name}
+bindsym $mod+p exec rofi -show rofi-power-menu -modes "rofi-power-menu:~/.local/bin/rofi-power-menu"
+bindsym $mod+period exec rofi -modes emoji -show emoji
+
+bindsym $mod+q kill
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+Control+space focus mode_toggle
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+a focus parent
+
+# screenshots
+bindsym Print exec grim - | wl-copy
+bindsym Shift+Print exec grim "~/Pictures/Screenshots/Screenshot @ $(date).png"
+bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+Shift+Print exec grim -g "$(slurp)" "~/Pictures/Screenshots/Screenshot @ $(date).png"
+
+bindsym $mod+End exec swaylock
+bindsym $mod+Home exec hibernate-prompt
+bindsym $mod+Shift+Home exec hibernate-ram-prompt
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+# hw keys
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym $mod+XF86AudioMute exec pactl set-sink-volume @DEFAULT_SINK@ 50% && $refresh_i3status
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioPlay exec playerctl play-pause
+
+bindsym XF86MonBrightnessUp exec light -A 2 && light -G > /etc/backlight_level
+bindsym XF86MonBrightnessDown exec light -U 2 && light -G > /etc/backlight_level
+
+# navigation
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# the shame of a lifetime
+## switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+## bit excessive
+bindsym $mod+Mod1+1 workspace number $ws11
+bindsym $mod+Mod1+2 workspace number $ws12
+bindsym $mod+Mod1+3 workspace number $ws13
+bindsym $mod+Mod1+4 workspace number $ws14
+bindsym $mod+Mod1+5 workspace number $ws15
+bindsym $mod+Mod1+6 workspace number $ws16
+bindsym $mod+Mod1+7 workspace number $ws17
+bindsym $mod+Mod1+8 workspace number $ws18
+bindsym $mod+Mod1+9 workspace number $ws19
+bindsym $mod+Mod1+0 workspace number $ws20
+## what the fuck
+bindsym $mod+Control+Mod1+1 workspace number $ws21
+bindsym $mod+Control+Mod1+2 workspace number $ws22
+bindsym $mod+Control+Mod1+3 workspace number $ws23
+bindsym $mod+Control+Mod1+4 workspace number $ws24
+bindsym $mod+Control+Mod1+5 workspace number $ws25
+bindsym $mod+Control+Mod1+6 workspace number $ws26
+bindsym $mod+Control+Mod1+7 workspace number $ws27
+bindsym $mod+Control+Mod1+8 workspace number $ws28
+bindsym $mod+Control+Mod1+9 workspace number $ws29
+bindsym $mod+Control+Mod1+0 workspace number $ws30
+## move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+## yup
+bindsym $mod+Shift+Mod1+1 move container to workspace number $ws11
+bindsym $mod+Shift+Mod1+2 move container to workspace number $ws12
+bindsym $mod+Shift+Mod1+3 move container to workspace number $ws13
+bindsym $mod+Shift+Mod1+4 move container to workspace number $ws14
+bindsym $mod+Shift+Mod1+5 move container to workspace number $ws15
+bindsym $mod+Shift+Mod1+6 move container to workspace number $ws16
+bindsym $mod+Shift+Mod1+7 move container to workspace number $ws17
+bindsym $mod+Shift+Mod1+8 move container to workspace number $ws18
+bindsym $mod+Shift+Mod1+9 move container to workspace number $ws19
+bindsym $mod+Shift+Mod1+0 move container to workspace number $ws20
+## EEYUP
+bindsym $mod+Control+Shift+Mod1+1 move container to workspace number $ws21
+bindsym $mod+Control+Shift+Mod1+2 move container to workspace number $ws22
+bindsym $mod+Control+Shift+Mod1+3 move container to workspace number $ws23
+bindsym $mod+Control+Shift+Mod1+4 move container to workspace number $ws24
+bindsym $mod+Control+Shift+Mod1+5 move container to workspace number $ws25
+bindsym $mod+Control+Shift+Mod1+6 move container to workspace number $ws26
+bindsym $mod+Control+Shift+Mod1+7 move container to workspace number $ws27
+bindsym $mod+Control+Shift+Mod1+8 move container to workspace number $ws28
+bindsym $mod+Control+Shift+Mod1+9 move container to workspace number $ws29
+bindsym $mod+Control+Shift+Mod1+0 move container to workspace number $ws30
+
+# modes
+mode "resize" {
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# status bar
+bar {
+    swaybar_command waybar
+    # status_command i3status
+    # separator_symbol "⛧"
+    # height 18
+
+    # colors {
+    #     background #000000
+    #     statusline #ffffff
+    #     separator  #808080
+    #     focused_workspace   $clr_ac  $clr_ac  $clr_txt
+    #     active_workspace    $clr_blk $clr_blk $clr_txt
+    #     inactive_workspace  $clr_blk $clr_blk $clr_txt
+    #     urgent_workspace    $clr_blk $clr_urg $clr_blk
+    # }
+}
+
+# services and autostart
+exec gentoo-pipewire-launcher restart
+exec /usr/libexec/polkit-mate-authentication-agent-1
+exec dunst
+
+for_window [title="^Picture-in-Picture$"] floating enable, sticky enable, border none
+
+# misc
+## mullvad is a piece of shit
+bindsym $mod+Mod1+r exec mullvad reconnect

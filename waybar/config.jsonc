@@ -1,0 +1,74 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 16,
+  "spacing": 0,
+  "modules-left": ["sway/workspaces", "custom/sep", "sway/window"],
+  "modules-right": [
+    "battery",
+    "custom/sep",
+    "pulseaudio",
+    "custom/sep",
+    "memory",
+    "custom/sep",
+    "cpu",
+    "custom/sep",
+    "clock",
+    "tray"
+  ],
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{name}"
+  },
+  "sway/window": {
+    "format": "{title}",
+    "format-empty": "nothing"
+  },
+  "battery": {
+    "interval": 10,
+    "states": {
+      "warning": 30,
+      "critical": 20
+    },
+    "format": "<span color='#72dec2'>DC</span> {capacity}%{time}",
+    "format-charging": "<span color='#72dec2'>AC</span> {capacity}%{time}",
+    "format-time": " : {H}:{m}",
+    "tooltip": false
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "<span color='#72dec2'>LT</span> {percent}%"
+  },
+  "pulseaudio": {
+    "format": "<span color='#72dec2'>VOL</span> {volume}%",
+    "format-muted": "<span color='#ffb545'>VOL</span> 0%",
+    "tooltip": false
+  },
+  "memory": {
+    "interval": 5,
+    "format": "<span color='#72dec2'>RAM</span> {percentage}%",
+    "tooltip": false
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "<span color='#72dec2'>CPU</span> {usage}%",
+    "tooltip": false
+  },
+  "clock": {
+    "format": "{:%H:%M}",
+    "format-alt": "{:%Y-%m-%d %H:%M}",
+    "tooltip": false,
+    "actions": {
+     "on-click-right": "mode"
+    }
+  },
+  "tray": {
+    "icon-size": 12,
+    "spacing": 10
+  },
+  "custom/sep": {
+    "format": "/",
+    "tooltip": false
+  }
+}
