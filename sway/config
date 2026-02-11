@@ -114,7 +114,7 @@ bindsym $mod+Home exec hibernate-prompt
 bindsym $mod+Shift+Home exec hibernate-ram-prompt
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'pkill sauron; swaymsg exit'
 
 # hw keys
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
@@ -257,6 +257,8 @@ bar {
 exec gentoo-pipewire-launcher restart
 exec /usr/libexec/polkit-mate-authentication-agent-1
 exec dunst
+exec nm-applet
+exec ENABLE_MPDSCRIBBLE=1 ~/.local/bin/sauron
 
 for_window [title="^Picture-in-Picture$"] floating enable, sticky enable, border none
 
