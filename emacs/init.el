@@ -35,7 +35,6 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-
 ;;; conditioning
 (defun homicide ()
   "Kill the current buffer immediately without prompting.
@@ -47,7 +46,15 @@ If the buffer visits a file and has unsaved changes, signal an error."
       (user-error "Buffer %s has unsaved changes; tranquility for now" (buffer-name buf)))
     (kill-buffer buf)))
 
+(defun murder ()
+  "Kill the current buffer immediately with no regard to unsaved changes."
+  (interactive)
+  (let ((buf (current-buffer)))
+    (set-buffer-modified-p nil)
+    (kill-buffer buf)))
+
 (global-set-key (kbd "C-x k") #'homicide)
+(global-set-key (kbd "C-x K") #'murder)
 
 ;;; meow
 (load "~/.emacs.d/meow.el")
