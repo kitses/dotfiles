@@ -84,6 +84,17 @@
       (unless (eobp)
 	(kill-region (point) (1+ (point))))))
 
+  (defun helix/pipe-selection (cmd)
+    "Pipe the current selection through a shell command, replacing it with output."
+    (interactive "sShell command on region: ")
+    (let ((start (if (use-region-p) (region-beginning) (point)))
+          (end (if (use-region-p) (region-end) (line-end-position))))
+      (shell-command-on-region start end cmd nil t)
+      (when (eq (char-before (region-end)) ?\n)
+	(save-excursion
+          (goto-char (region-end))
+          (delete-char -1)))))
+
   ;;; minor mode maps
   (define-prefix-command 'helix/goto-map)
   (define-key helix/goto-map (kbd "g") 'beginning-of-buffer)
@@ -240,6 +251,7 @@
      '(">" . indent-rigidly-right-to-tab-stop)
      '("<" . indent-rigidly-left-to-tab-stop)
      '("=" . indent-region)
+     '("|" . helix/pipe-selection)
      '("C-c" . comment-line)
 
      ;; selection manipulation
