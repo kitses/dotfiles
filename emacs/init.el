@@ -57,7 +57,7 @@ If the buffer visits a file and has unsaved changes, signal an error."
 (global-set-key (kbd "C-x K") #'murder)
 
 ;;; meow
-(load "~/.emacs.d/meow.el")
+(load "~/.emacs.d/grawlix.el")
 
 ;;; packages
 (centaur-tabs-mode)
