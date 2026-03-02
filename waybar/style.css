@@ -30,10 +30,12 @@ window#waybar {
 #workspaces button.active {
   color: #ffffff;
   border-bottom: 1px solid #72dec2;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 #workspaces button.urgent {
-  color: #ffb545;
+  color: #000000;
+  background-color: #ffb545;
   border-bottom: 1px solid #ffb545;
 }
 
