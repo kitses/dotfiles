@@ -53,6 +53,13 @@
       (goto-char (region-beginning)))
     (meow-yank))
 
+  (defun helix/copy-keep ()
+    "Copy selection without canceling it."
+    (interactive)
+    (when (use-region-p)
+      (let ((deactivate-mark nil))
+	(kill-ring-save (region-beginning) (region-end)))))
+
   (defun helix/collapse-selection ()
     "Collapse selection onto a single cursor."
     (interactive)
@@ -243,7 +250,7 @@
      '("O" . meow-open-above)
      '("u" . meow-undo)
      '("U" . undo-redo)
-     '("y" . meow-save)
+     '("y" . helix/copy-keep)
      '("p" . meow-yank)
      '("P" . helix/paste-before)
      '("d" . helix/delete-selection)
