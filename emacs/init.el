@@ -37,6 +37,7 @@
 (column-number-mode)
 (setq-default display-line-numbers-width 3)
 (setq-default display-line-numbers-grow-only t)
+(setq-default display-line-numbers-type 'relative)
 
 (add-hook 'after-change-major-mode-hook
           (lambda ()
