@@ -25,7 +25,7 @@
    ("C-<f5>" . modus-themes-select)
    ("M-<f5>" . modus-themes-load-random))
   :config
-  (setq modus-themes-mixed-fonts t)
+  (setq modus-themes-mixed-fonts nil)
   (setq modus-themes-italic-constructs t)
   (modus-themes-load-theme 'ef-tritanopia-dark))
 
