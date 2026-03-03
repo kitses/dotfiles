@@ -8,10 +8,10 @@
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(centaur-tabs company doom-themes magit markdown-mode
+   '(centaur-tabs company doom-themes emmet-mode magit markdown-mode meow
 		  multiple-cursors nix-ts-mode nyan-mode rust-mode
 		  timu-caribbean-theme typst-ts-mode
-		  visual-fill-column vterm)))
+		  visual-fill-column vterm yaml-mode)))
 
 ;;; appearance
 (add-to-list 'default-frame-alist '(font . "Input Mono-8"))
@@ -40,6 +40,7 @@
 (put 'upcase-region 'disabled nil)
 
 ;;; modes
+(add-to-list 'auto-mode-alist '("\\.njk\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-ts-mode))
 
