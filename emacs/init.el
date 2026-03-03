@@ -8,14 +8,26 @@
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(centaur-tabs company doom-themes emmet-mode magit markdown-mode meow
-		  multiple-cursors nix-ts-mode nyan-mode rust-mode
-		  timu-caribbean-theme typst-ts-mode
-		  visual-fill-column vterm yaml-mode)))
+   '(centaur-tabs company doom-themes ef-themes emmet-mode magit
+		  markdown-mode meow mood-line multiple-cursors
+		  nix-ts-mode nyan-mode rust-mode timu-caribbean-theme
+		  typst-ts-mode visual-fill-column vterm yaml-mode)))
 
 ;;; appearance
 (add-to-list 'default-frame-alist '(font . "Input Mono-8"))
-(load-theme 'doom-laserwave t)
+
+(use-package ef-themes
+  :ensure t
+  :init
+  (ef-themes-take-over-modus-themes-mode 1)
+  :bind
+  (("<f5>" . modus-themes-rotate)
+   ("C-<f5>" . modus-themes-select)
+   ("M-<f5>" . modus-themes-load-random))
+  :config
+  (setq modus-themes-mixed-fonts t)
+  (setq modus-themes-italic-constructs t)
+  (modus-themes-load-theme 'ef-tritanopia-dark))
 
 (when (display-graphic-p)
   (tool-bar-mode -1)
@@ -35,14 +47,17 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq mouse-autoselect-window t)
-(setq centaur-tabs-set-bar 'over)
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
 ;;; modes
-(add-to-list 'auto-mode-alist '("\\.njk\\'" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-ts-mode))
+(dolist (mode '(("\\.njk\\'"   . html-mode)
+                ("\\.ya?ml\\'" . yaml-ts-mode)
+                ("\\.nix\\'"   . nix-ts-mode)))
+  (add-to-list 'auto-mode-alist mode))
+
+(dolist (hook '(html-mode-hook css-mode-hook))
+  (add-hook hook 'emmet-mode))
 
 ;;; conditioning
 (defun homicide ()
@@ -65,17 +80,30 @@ If the buffer visits a file and has unsaved changes, signal an error."
 (global-set-key (kbd "C-x k") #'homicide)
 (global-set-key (kbd "C-x K") #'murder)
 
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "C-0") (lambda () (interactive) (text-scale-set 0)))
+
+;; eglot
+(defun cerberus ()
+  (require 'eglot)
+  (condition-case _
+      (progn
+        (eglot--guess-contact)
+        (eglot-ensure))
+    (error nil)))
+
 ;;; meow
 (load "~/.emacs.d/grawlix.el")
 
 ;;; packages
-(centaur-tabs-mode)
-(global-company-mode)
-(nyan-mode)
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (centaur-tabs-mode)
+            (global-company-mode)
+            (nyan-mode)))
 
-(require 'eglot)
-(add-hook 'rust-mode-hook #'eglot-ensure)
-(add-hook 'c-mode-hook #'eglot-ensure)
+(add-hook 'prog-mode-hook #'cerberus)
 
 ;;; other hooks
 (add-hook 'markdown-mode-hook
