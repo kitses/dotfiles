@@ -2,6 +2,10 @@
   :ensure t
   :config
 
+  ;; stop space from acting as tab in search prompts
+  (define-key minibuffer-local-completion-map (kbd "SPC") 'self-insert-command)
+  (define-key minibuffer-local-must-match-map (kbd "SPC") 'self-insert-command)
+
   ;;; custom funcs to emulate helix
   (defun helix/insert-line-start ()
     "Insert at the first non-whitespace character of the line."
