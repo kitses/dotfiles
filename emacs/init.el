@@ -8,7 +8,7 @@
  ;; If there is more than one, they won't work right.
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(centaur-tabs company doom-themes ef-themes emmet-mode magit
+   '(centaur-tabs company consult doom-themes ef-themes emmet-mode magit
 		  markdown-mode meow mood-line multiple-cursors
 		  nix-ts-mode nyan-mode orderless rust-mode
 		  timu-caribbean-theme typst-ts-mode vertico

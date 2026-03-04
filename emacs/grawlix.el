@@ -6,6 +6,10 @@
   (define-key minibuffer-local-completion-map (kbd "SPC") 'self-insert-command)
   (define-key minibuffer-local-must-match-map (kbd "SPC") 'self-insert-command)
 
+  ;; use consult for xref
+  (setq xref-show-definitions-function #'consult-xref
+        xref-show-xrefs-function #'consult-xref)
+
   ;;; custom funcs to emulate helix
   (defun helix/insert-line-start ()
     "Insert at the first non-whitespace character of the line."
@@ -173,14 +177,14 @@
     (meow-leader-define-key
      '("f" . project-find-file)
      '("F" . find-file)
-     '("b" . switch-to-buffer)
+     '("b" . consult-buffer)
      '("k" . display-local-help)
      '("a" . eglot-code-actions)
      '("r" . eglot-rename)
-     '("d" . flymake-show-buffer-diagnostics)
+     '("d" . consult-flymake)
      '("y" . kill-ring-save)
      '("p" . yank)
-     '("/" . project-find-regexp)
+     '("/" . consult-ripgrep)
      '("?" . execute-extended-command)
      '("w" . helix/window-map)
      '("1" . meow-digit-argument)
@@ -232,7 +236,7 @@
 
      ;; line selection overrides
      '("x" . meow-line)
-     '("X" . meow-goto-line)
+     '("X" . consult-goto-line)
      '("%" . mark-whole-buffer)
 
      ;; scrolling / jumping
@@ -294,3 +298,7 @@
 
   (meow-setup)
   (meow-global-mode 1))
+
+(use-package consult
+  :ensure t
+  :after meow)
