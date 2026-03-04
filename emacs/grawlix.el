@@ -23,6 +23,15 @@
     (end-of-line)
     (meow-insert))
 
+  (defun helix/select-line ()
+    "Select the current line, including the newline character."
+    (interactive)
+    (if (use-region-p)
+	(forward-line 1)
+      (meow-line 1)
+      (unless (eobp)
+	(forward-char 1))))
+
   (defun helix/replace-char (char)
     "Replace each character in the current selection with CHAR."
     (interactive "cReplace with char: ")
@@ -89,15 +98,9 @@
     "Delete the current selection."
     (interactive)
     (if (use-region-p)
-	(let* ((key (kbd "C-w"))
-               (map meow-normal-state-keymap)
-               (orig (lookup-key map key)))
-          (define-key map key nil)
-          (unwind-protect
-              (call-interactively 'meow-kill)
-            (define-key map key orig)))
+	(delete-region (region-beginning) (region-end))
       (unless (eobp)
-	(kill-region (point) (1+ (point))))))
+	(delete-char 1))))
 
   (defun helix/pipe-selection (cmd)
     "Pipe the current selection through a shell command, replacing it with output."
@@ -183,6 +186,7 @@
      '("r" . eglot-rename)
      '("d" . consult-flymake)
      '("y" . kill-ring-save)
+     '("M-w" . kill-ring-save)
      '("p" . yank)
      '("/" . consult-ripgrep)
      '("?" . execute-extended-command)
@@ -235,7 +239,7 @@
      '("F" . helix/find-prev)
 
      ;; line selection overrides
-     '("x" . meow-line)
+     '("x" . helix/select-line)
      '("X" . consult-goto-line)
      '("%" . mark-whole-buffer)
 
