@@ -10,8 +10,9 @@
  '(package-selected-packages
    '(centaur-tabs company doom-themes ef-themes emmet-mode magit
 		  markdown-mode meow mood-line multiple-cursors
-		  nix-ts-mode nyan-mode rust-mode timu-caribbean-theme
-		  typst-ts-mode visual-fill-column vterm yaml-mode)))
+		  nix-ts-mode nyan-mode orderless rust-mode
+		  timu-caribbean-theme typst-ts-mode vertico
+		  visual-fill-column vterm yaml-mode)))
 
 ;;; appearance
 (add-to-list 'default-frame-alist '(font . "Input Mono-8"))
@@ -97,6 +98,22 @@ If the buffer visits a file and has unsaved changes, signal an error."
 ;;; meow
 (load "~/.emacs.d/grawlix.el")
 
+;; vertico
+(use-package vertico
+  :init
+  (vertico-mode))
+
+(use-package savehist
+  :init
+  (savehist-mode))
+
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-category-defaults nil)
+  (completion-pcm-leading-wildcard t))
+
 ;;; packages
 (add-hook 'emacs-startup-hook
           (lambda ()
@@ -105,14 +122,6 @@ If the buffer visits a file and has unsaved changes, signal an error."
             (nyan-mode)))
 
 (add-hook 'prog-mode-hook #'cerberus)
-
-;;; other hooks
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (setq-local visual-fill-column-width 90)
-            (setq-local display-line-numbers-width-start t)
-            (visual-line-mode 1)
-            (visual-fill-column-mode 1)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
