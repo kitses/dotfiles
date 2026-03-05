@@ -28,13 +28,15 @@
     }
   },
   "battery": {
-    "interval": 10,
+    "interval": 5,
     "states": {
       "warning": 30,
       "critical": 20
     },
     "format": "<span color='#72dec2'>DC</span> {capacity}%{time}",
     "format-charging": "<span color='#72dec2'>AC</span> {capacity}%{time}",
+    "format-warning": "DC {capacity}%{time}",
+    "format-critical": "DC {capacity}%{time}",
     "format-time": " : {H}:{m}",
     "tooltip": false
   },
