@@ -1,4 +1,4 @@
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SSH_AUTH_SOCK
 exec dex --autostart --environment sway
 seat seat0 xcursor_theme Adwaita 24
 
