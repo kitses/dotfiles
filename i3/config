@@ -3,7 +3,7 @@
 # variables
 set $mod Mod4
 
-font pango:Inconsolata 8
+font pango:Input Mono Compressed Extra-Condensed 8
 
 set $refresh_i3status killall -SIGUSR1 i3status
 
@@ -49,20 +49,23 @@ default_floating_border pixel 1
 ## colour scheme
 set $clr_bg  #282828
 set $clr_txt #ffffff
-set $clr_urg #e45461
+set $clr_urg #ffb545
 set $clr_blk #000000
 set $clr_foc #0a0a0a
-set $clr_ac  #4a019c
+set $clr_ac  #72dec2
 
-client.focused           $clr_blk $clr_foc $clr_txt $clr_bg $clr_txt
-client.focused_inactive  $clr_blk $clr_foc $clr_txt $clr_bg $clr_txt
-client.unfocused         $clr_blk $clr_blk #777777  $clr_bg $clr_blk
+client.focused           $clr_blk $clr_foc $clr_txt $clr_bg  $clr_txt
+client.focused_inactive  $clr_blk $clr_foc $clr_txt $clr_bg  $clr_txt
+client.unfocused         $clr_blk $clr_blk #777777  $clr_bg  $clr_blk
 client.urgent            $clr_blk $clr_urg $clr_blk $clr_blk $clr_blk
 
 ## input config
 exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Natural Scrolling Enabled" 1
 exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Tapping Enabled" 1
 exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Accel Profile Enabled" 0 1 0
+
+## gamma correction
+exec --no-startup-id xrandr --output eDP-1 --gamma 1:1:1.16
 
 # bullshit
 bindsym $mod+Return exec alacritty
@@ -84,11 +87,11 @@ bindsym $mod+e layout toggle split
 bindsym $mod+a focus parent
 
 bindsym Print exec --no-startup-id "maim -u | xclip -selection clipboard -t image/png"
-bindsym Shift+Print exec --no-startup-id sh -c 'maim -su "/home/kit/Pictures/Screenshots/Screenshot @ $(date).png"'
+bindsym Shift+Print exec --no-startup-id sh -c 'maim -su "~/Pictures/Screenshots/Screenshot @ $(date).png"'
 bindsym $mod+Print exec --no-startup-id "maim -su | xclip -selection clipboard -t image/png"
-bindsym $mod+Shift+Print exec --no-startup-id sh -c 'maim -u "/home/kit/Pictures/Screenshots/Screenshot @ $(date).png"'
+bindsym $mod+Shift+Print exec --no-startup-id sh -c 'maim -u "~/Pictures/Screenshots/Screenshot @ $(date).png"'
 
-bindsym $mod+End exec --no-startup-id light-locker-command -l
+bindsym $mod+End exec --no-startup-id i3lock -c 000000
 bindsym $mod+Home exec --no-startup-id hibernate-prompt
 bindsym $mod+Shift+Home exec --no-startup-id hibernate-ram-prompt
 bindsym $mod+Shift+c reload
@@ -99,8 +102,8 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+Mod1+r exec --no-startup-id mullvad reconnect
 
 # hw keys
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym $mod+XF86AudioMute exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 50% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
@@ -221,17 +224,22 @@ bindsym $mod+r mode "resize"
 
 # status bar
 bar {
+    i3bar_command i3bar -t
     status_command i3status
-    separator_symbol "⛧"
+    tray_output none
+    separator_symbol " ✷ "
+    position top
+
+    padding 0 4px 0 0
 
     colors {
-        background #000000
+        background #000000CF
         statusline #ffffff
-        separator  #808080
-        focused_workspace   $clr_ac  $clr_ac  $clr_txt
-        active_workspace    $clr_blk $clr_blk $clr_txt
-        inactive_workspace  $clr_blk $clr_blk $clr_txt
-        urgent_workspace    $clr_blk $clr_urg $clr_blk
+        separator  #606060
+        focused_workspace   $clr_ac   $clr_ac   $clr_blk
+        active_workspace    #000000CF #000000CF $clr_txt
+        inactive_workspace  #000000CF #000000CF $clr_txt
+        urgent_workspace    #000000CF $clr_urg  $clr_blk
     }
 }
 
@@ -241,17 +249,11 @@ exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
 
 ## i don't know if this shit actually does anything but i don't care.
 exec --no-startup-id dbus-update-activation-environment --all
-exec --no-startup-id gnome-keyring-daemon --start --components=secrets
-exec --no-startup-id export $(gnome-keyring-daemon)
 
 exec --no-startup-id fastcompmgr
 exec --no-startup-id dunst
-exec --no-startup-id light-locker
 exec --no-startup-id wall
 exec --no-startup-id dex --autostart --environment i3
 
-exec --no-startup-id nm-applet
-
 ## mpd is at the bottom because it is fucking shit
-exec --no-startup-id mpd
-exec --no-startup-id mpdscribble
+exec --no-startup-id ~/.local/bin/sauron
