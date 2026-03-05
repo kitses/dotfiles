@@ -33,15 +33,6 @@
     (end-of-line)
     (meow-insert))
 
-  (defun grawlix/select-line ()
-    "Select the current line, including the newline character."
-    (interactive)
-    (if (use-region-p)
-	(forward-line 1)
-      (meow-line 1)
-      (unless (eobp)
-	(forward-char 1))))
-
   (defun grawlix/replace-char (char)
     "Replace each character in the current selection with CHAR."
     (interactive "cReplace with char: ")
@@ -249,7 +240,7 @@
      '("F" . grawlix/find-prev)
 
      ;; line selection overrides
-     '("x" . grawlix/select-line)
+     '("x" . meow-line)
      '("X" . consult-goto-line)
      '("%" . mark-whole-buffer)
 
