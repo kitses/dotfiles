@@ -1,65 +1,46 @@
+;;; -*- lexical-binding: t; -*-
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(inhibit-startup-screen t)
- '(package-selected-packages
-   '(centaur-tabs company consult doom-themes ef-themes emmet-mode magit
-		  markdown-mode meow mood-line multiple-cursors
-		  nix-ts-mode nyan-mode orderless rust-mode
-		  timu-caribbean-theme typst-ts-mode vertico
-		  visual-fill-column vterm yaml-mode)))
 
-;;; appearance
-(add-to-list 'default-frame-alist '(font . "Input Mono-8"))
-
-(use-package ef-themes
-  :ensure t
+;;; built-in settings
+(use-package emacs
   :init
-  (ef-themes-take-over-modus-themes-mode 1)
+  (setq inhibit-startup-screen t)
+  (setq make-backup-files nil)
+  (setq auto-save-default nil)
+  (setq mouse-autoselect-window t)
+  (put 'downcase-region 'disabled nil)
+  (put 'upcase-region 'disabled nil)
+
+  ;; appearance
+  (add-to-list 'default-frame-alist '(font . "Input Mono-8"))
+  (when (display-graphic-p)
+    (tool-bar-mode -1)
+    (menu-bar-mode -1)
+    (scroll-bar-mode -1))
+  (column-number-mode)
+  (setq-default display-line-numbers-width 3)
+  (setq-default display-line-numbers-grow-only t)
+  (setq-default display-line-numbers-type 'relative)
+  (add-hook 'after-change-major-mode-hook
+            (lambda ()
+              (when (buffer-file-name)
+                (display-line-numbers-mode 1))))
+
+  ;; modes
+  (dolist (mode '(("\\.njk\\'"   . html-mode)
+                  ("\\.ya?ml\\'" . yaml-ts-mode)
+                  ("\\.nix\\'"   . nix-ts-mode)))
+    (add-to-list 'auto-mode-alist mode))
+
   :bind
-  (("<f5>" . modus-themes-rotate)
-   ("C-<f5>" . modus-themes-select)
-   ("M-<f5>" . modus-themes-load-random))
-  :config
-  (setq modus-themes-mixed-fonts nil)
-  (setq modus-themes-italic-constructs t)
-  (modus-themes-load-theme 'ef-tritanopia-dark))
-
-(when (display-graphic-p)
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1))
-
-(column-number-mode)
-(setq-default display-line-numbers-width 3)
-(setq-default display-line-numbers-grow-only t)
-(setq-default display-line-numbers-type 'relative)
-
-(add-hook 'after-change-major-mode-hook
-          (lambda ()
-            (when (buffer-file-name)
-              (display-line-numbers-mode 1))))
-
-;;; defaults
-(setq make-backup-files nil)
-(setq auto-save-default nil)
-(setq mouse-autoselect-window t)
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-;;; modes
-(dolist (mode '(("\\.njk\\'"   . html-mode)
-                ("\\.ya?ml\\'" . yaml-ts-mode)
-                ("\\.nix\\'"   . nix-ts-mode)))
-  (add-to-list 'auto-mode-alist mode))
-
-(dolist (hook '(html-mode-hook css-mode-hook))
-  (add-hook hook 'emmet-mode))
+  (("C-x k" . homicide)
+   ("C-x K" . murder)
+   ("C-+"   . text-scale-increase)
+   ("C--"   . text-scale-decrease)
+   ("C-0"   . (lambda () (interactive) (text-scale-set 0)))))
 
 ;;; conditioning
 (defun homicide ()
@@ -79,13 +60,6 @@ If the buffer visits a file and has unsaved changes, signal an error."
     (set-buffer-modified-p nil)
     (kill-buffer buf)))
 
-(global-set-key (kbd "C-x k") #'homicide)
-(global-set-key (kbd "C-x K") #'murder)
-
-(global-set-key (kbd "C-+") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
-(global-set-key (kbd "C-0") (lambda () (interactive) (text-scale-set 0)))
-
 ;; eglot
 (defun cerberus ()
   (require 'eglot)
@@ -95,11 +69,22 @@ If the buffer visits a file and has unsaved changes, signal an error."
         (eglot-ensure))
     (error nil)))
 
-;;; meow
-(load "~/.emacs.d/grawlix.el")
+;;; packages
+(use-package ef-themes
+  :ensure t
+  :init
+  (ef-themes-take-over-modus-themes-mode 1)
+  :bind
+  (("<f5>"   . modus-themes-rotate)
+   ("C-<f5>" . modus-themes-select)
+   ("M-<f5>" . modus-themes-load-random))
+  :config
+  (setq modus-themes-mixed-fonts nil)
+  (setq modus-themes-italic-constructs t)
+  (modus-themes-load-theme 'ef-tritanopia-dark))
 
-;; vertico
 (use-package vertico
+  :ensure t
   :init
   (vertico-mode))
 
@@ -108,24 +93,31 @@ If the buffer visits a file and has unsaved changes, signal an error."
   (savehist-mode))
 
 (use-package orderless
+  :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles partial-completion))))
   (completion-category-defaults nil)
   (completion-pcm-leading-wildcard t))
 
-;;; packages
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (centaur-tabs-mode)
-            (global-company-mode)
-            (nyan-mode)))
+(use-package emmet-mode
+  :ensure t
+  :hook ((html-mode css-mode) . emmet-mode))
 
-(add-hook 'prog-mode-hook #'cerberus)
+(use-package centaur-tabs
+  :ensure t
+  :hook (emacs-startup . centaur-tabs-mode))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(use-package company
+  :ensure t
+  :hook (emacs-startup . global-company-mode))
+
+(use-package nyan-mode
+  :ensure t
+  :hook (emacs-startup . nyan-mode))
+
+(use-package eglot
+  :hook (prog-mode . cerberus))
+
+;;; meow
+(load (expand-file-name "grawlix.el" user-emacs-directory))
