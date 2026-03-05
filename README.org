@@ -4,28 +4,28 @@
 
 Infrequently updated and fragmented. Complaints encouraged for us to get our act together.
 
-** Editors
+* Editors
 + [[file:emacs/][GNU Emacs]]
   + [[file:emacs/grawlix.el][Grawlix]]
 + [[file:helix/][Helix]]
 
-** Shells
+* Shells
 + [[file:powershell][PowerShell]]
 
-** System
+* System
 + [[file:openrc/][OpenRC Services]]
   + [[file:openrc/nix-daemon][nix-daemon]]
   + [[file:openrc/restore-backlight][restore-backlight]] (depends on [[file:bin/restore-backlight][bin/restore-backlight]] & [[https://packages.gentoo.org/packages/dev-libs/light][dev-libs/light]])
 
-** Terminals
+* Terminals
 + [[file:alacritty/][Alacritty]]
 + [[file:foot/][foot]]
 
-** Window Managers
+* Window Managers
 + [[file:i3/][i3]]
   + [[file:i3/.i3status.conf][i3status]] (depends on [[https://www.nerdfonts.com/][Nerd Fonts symbols]])
 + [[file:sway/][Sway]]
   + [[file:waybar][Waybar]]
 
-** Other
+* Other
 + [[file:oldtwitter/][OldTwitter]]
