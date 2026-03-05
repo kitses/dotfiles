@@ -1,6 +1,6 @@
+#+title:  Sylvester-Laurel dotfiles
+#+author: 2311, a.k.a. Kit Sylvester
 #+options: toc:nil
-
-* Sylvester-Laurel dotfiles
 
 Infrequently updated and fragmented. Complaints encouraged for us to get our act together.
 
