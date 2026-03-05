@@ -1,0 +1,30 @@
+* Sylvester-Laurel dotfiles
+
+Infrequently updated and fragmented. Complaints encouraged for us to get our act together.
+
+** Editors
++ [[file:emacs/][GNU Emacs]]
+  + [[file:emacs/grawlix.el][Grawlix]]
++ [[file:helix/][Helix]]
+
+** Shells
++ [[file:fish/][fish]]
++ [[file:powershell][PowerShell]]
+
+** System
++ [[file:openrc/][OpenRC Services]]
+  + [[file:openrc/nix-daemon][nix-daemon]]
+  + [[file:openrc/restore-backlight][restore-backlight]] (depends on [[file:bin/restore-backlight][bin/restore-backlight]] & [[https://packages.gentoo.org/packages/dev-libs/light][dev-libs/light]])
+
+** Terminals
++ [[file:alacritty/][Alacritty]]
++ [[file:foot/][foot]]
+
+** Window Managers
++ [[file:i3/][i3]]
+  + [[file:i3/.i3status.conf][i3status]]
++ [[file:sway/][Sway]]
+  + [[file:waybar][Waybar]]
+
+** Other
++ [[file:oldtwitter/][OldTwitter]]
