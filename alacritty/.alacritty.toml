@@ -1,8 +1,8 @@
 [font]
-normal = { family = "Inconsolata", style = "Regular" }
-size = 5
+normal = { family = "Input Mono", style = "Normal" }
+size = 8
 [window]
-dimensions = { columns = 120, lines = 30 }
+dimensions = { columns = 100, lines = 30 }
 dynamic_padding = true
 opacity = 0.81
 dynamic_title = true
@@ -33,3 +33,5 @@ white = "#ffffff"
 [bell]
 duration = 200
 color = "#ed1f67"
+[env]
+WINIT_X11_SCALE_FACTOR = "1.0"
