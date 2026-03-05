@@ -70,19 +70,6 @@ If the buffer visits a file and has unsaved changes, signal an error."
     (error nil)))
 
 ;;; packages
-(use-package ef-themes
-  :ensure t
-  :init
-  (ef-themes-take-over-modus-themes-mode 1)
-  :bind
-  (("<f5>"   . modus-themes-rotate)
-   ("C-<f5>" . modus-themes-select)
-   ("M-<f5>" . modus-themes-load-random))
-  :config
-  (setq modus-themes-mixed-fonts nil)
-  (setq modus-themes-italic-constructs t)
-  (modus-themes-load-theme 'ef-tritanopia-dark))
-
 (use-package vertico
   :ensure t
   :init
@@ -104,20 +91,37 @@ If the buffer visits a file and has unsaved changes, signal an error."
   :ensure t
   :hook ((html-mode css-mode) . emmet-mode))
 
-(use-package centaur-tabs
-  :ensure t
-  :hook (emacs-startup . centaur-tabs-mode))
-
 (use-package company
   :ensure t
   :hook (emacs-startup . global-company-mode))
+
+(use-package eglot
+  :hook (prog-mode . cerberus))
+
+;; non-vital
+(use-package ef-themes
+  :ensure t
+  :init
+  (ef-themes-take-over-modus-themes-mode 1)
+  :bind
+  (("<f5>"   . modus-themes-rotate)
+   ("C-<f5>" . modus-themes-select)
+   ("M-<f5>" . modus-themes-load-random))
+  :config
+  (setq modus-themes-mixed-fonts nil)
+  (setq modus-themes-italic-constructs t)
+  (modus-themes-load-theme 'ef-tritanopia-dark))
+
+(use-package centaur-tabs
+  :ensure t
+  :hook (emacs-startup . centaur-tabs-mode))
 
 (use-package nyan-mode
   :ensure t
   :hook (emacs-startup . nyan-mode))
 
-(use-package eglot
-  :hook (prog-mode . cerberus))
+(use-package magit
+  :ensure t)
 
 ;;; meow
 (load (expand-file-name "grawlix.el" user-emacs-directory))

@@ -1,5 +1,13 @@
 ;;; -*- lexical-binding: t; -*-
 
+(use-package consult
+  :ensure t)
+
+(use-package multiple-cursors
+  :ensure t
+  :config
+  (setq mc/always-run-for-all t))
+
 (use-package meow
   :ensure t
   :config
@@ -304,7 +312,3 @@
 
   (meow-setup)
   (meow-global-mode 1))
-
-(use-package consult
-  :ensure t
-  :after meow)
