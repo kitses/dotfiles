@@ -114,6 +114,12 @@
           (goto-char (region-end))
           (delete-char -1)))))
 
+  ;;; conditioning
+  (define-advice kill-region (:around (orig-fun beg end &optional region) grawlix/anti-kill-ring)
+    "Never modify the kill ring when killing/deleting text."
+    (let ((kill-ring kill-ring))
+      (funcall orig-fun beg end region)))
+
   ;;; minor mode maps
   (define-prefix-command 'grawlix/goto-map)
   (define-key grawlix/goto-map (kbd "g") 'beginning-of-buffer)
