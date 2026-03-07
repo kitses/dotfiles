@@ -260,7 +260,7 @@ exec dunst
 exec nm-applet
 exec ENABLE_MPDSCRIBBLE=1 ~/.local/bin/sauron
 
-for_window [title="^Picture-in-Picture$"] floating enable, sticky enable, border none
+for_window [title="^Picture-in-(?i)Picture$"] floating enable, sticky enable, border none
 
 # misc
 ## mullvad is a piece of shit
