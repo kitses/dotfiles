@@ -29,18 +29,24 @@
               (when (buffer-file-name)
                 (display-line-numbers-mode 1))))
 
-  ;; modes
+  ;; languages
   (dolist (mode '(("\\.njk\\'"   . html-mode)
                   ("\\.ya?ml\\'" . yaml-ts-mode)
                   ("\\.nix\\'"   . nix-ts-mode)))
     (add-to-list 'auto-mode-alist mode))
+
+  (add-hook 'org-mode-hook (lambda ()
+			     (setq truncate-lines nil)
+			     (setq word-wrap t)))
 
   :bind
   (("C-x k" . homicide)
    ("C-x K" . murder)
    ("C-+"   . text-scale-increase)
    ("C--"   . text-scale-decrease)
-   ("C-0"   . (lambda () (interactive) (text-scale-set 0)))))
+   ("C-0"   . (lambda () (interactive) (text-scale-set 0))))
+   ("C-x <right>" . centaur-tabs-forward)
+   ("C-x <left>" . centaur-tabs-backward))
 
 ;;; conditioning
 (defun homicide ()
@@ -114,6 +120,7 @@ If the buffer visits a file and has unsaved changes, signal an error."
 
 (use-package centaur-tabs
   :ensure t
+  :bind
   :hook (emacs-startup . centaur-tabs-mode))
 
 (use-package nyan-mode
@@ -126,6 +133,16 @@ If the buffer visits a file and has unsaved changes, signal an error."
   (:map magit-mode-map
 	("K" . magit-discard)
 	("k" . nil)))
+
+;;; languages
+(use-package nix-mode
+  :ensure t)
+
+(use-package rust-mode
+  :ensure t)
+
+(use-package typescript-mode
+  :ensure t)
 
 ;;; meow
 (load (expand-file-name "grawlix.el" user-emacs-directory))
