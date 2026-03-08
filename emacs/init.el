@@ -120,7 +120,6 @@ If the buffer visits a file and has unsaved changes, signal an error."
 
 (use-package centaur-tabs
   :ensure t
-  :bind
   :hook (emacs-startup . centaur-tabs-mode))
 
 (use-package nyan-mode
