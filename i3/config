@@ -224,9 +224,7 @@ bindsym $mod+r mode "resize"
 
 # status bar
 bar {
-    i3bar_command i3bar -t
     status_command i3status
-    tray_output none
     separator_symbol " ✷ "
     position top
 
@@ -254,6 +252,8 @@ exec --no-startup-id fastcompmgr
 exec --no-startup-id dunst
 exec --no-startup-id wall
 exec --no-startup-id dex --autostart --environment i3
+
+exec --no-startup-id nm-applet
 
 ## mpd is at the bottom because it is fucking shit
 exec --no-startup-id ~/.local/bin/sauron
