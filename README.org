@@ -24,6 +24,8 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 * Window Managers
 + [[file:i3/][i3]]
   + [[file:i3/.i3status.conf][i3status]] (depends on [[https://www.nerdfonts.com/][Nerd Fonts symbols]])
+
+** Deprecated
 + [[file:sway/][Sway]]
   + [[file:waybar][Waybar]]
 
