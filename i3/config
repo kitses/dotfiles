@@ -65,7 +65,7 @@ exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Tapping En
 exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Accel Profile Enabled" 0 1 0
 
 ## gamma correction
-exec --no-startup-id xrandr --output eDP-1 --gamma 1:1:1.14
+exec --no-startup-id xrandr --output eDP-1 --gamma 1:1:1.15
 
 # bullshit
 bindsym $mod+Return exec alacritty
