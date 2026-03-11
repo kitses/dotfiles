@@ -9,7 +9,7 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
   + [[file:emacs/grawlix.el][Grawlix]]
 
 ** Deprecated
-+ [[file:helix/][Helix]]
++ [[file:deprecated/helix/][Helix]]
 
 * Shells
 + [[file:powershell][PowerShell]]
@@ -28,8 +28,8 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
   + [[file:i3/.i3status.conf][i3status]] (depends on [[https://www.nerdfonts.com/][Nerd Fonts symbols]])
 
 ** Deprecated
-+ [[file:sway/][Sway]]
-  + [[file:waybar][Waybar]]
++ [[file:deprecated/sway/][Sway]]
+  + [[file:deprecated/waybar][Waybar]]
 
 * Other
 + [[file:oldtwitter/][OldTwitter]]
