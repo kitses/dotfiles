@@ -127,11 +127,7 @@ If the buffer visits a file and has unsaved changes, signal an error."
   :hook (emacs-startup . nyan-mode))
 
 (use-package magit
-  :ensure t
-  :bind
-  (:map magit-mode-map
-	("K" . magit-discard)
-	("k" . nil)))
+  :ensure t)
 
 ;;; languages
 (use-package nix-mode
@@ -142,6 +138,3 @@ If the buffer visits a file and has unsaved changes, signal an error."
 
 (use-package typescript-mode
   :ensure t)
-
-;;; meow
-(load (expand-file-name "grawlix.el" user-emacs-directory))
