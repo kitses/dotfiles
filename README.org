@@ -7,7 +7,7 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 * Editors
 + [[file:emacs/][GNU Emacs]]
   + [[file:emacs/grawlix.el][Grawlix]]
-+ [[file:deprecated/helix/][Helix]]
++ [[file:helix/][Helix]]
 
 * Shells
 + [[file:powershell][PowerShell]]
