@@ -5,7 +5,6 @@
 Infrequently updated and fragmented. Complaints encouraged for us to get our act together.
 
 * Editors
-+ [[file:emacs/][GNU Emacs]]
 + [[file:helix/][Helix]]
 
 * Shells
