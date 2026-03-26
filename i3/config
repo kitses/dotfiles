@@ -59,14 +59,6 @@ client.focused_inactive  $clr_blk $clr_foc $clr_txt $clr_bg  $clr_txt
 client.unfocused         $clr_blk $clr_blk #777777  $clr_bg  $clr_blk
 client.urgent            $clr_blk $clr_urg $clr_blk $clr_blk $clr_blk
 
-## input config
-exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Natural Scrolling Enabled" 1
-exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Tapping Enabled" 1
-exec --no-startup-id xinput set-prop "Synaptics TM3276-022" "libinput Accel Profile Enabled" 0 1 0
-
-## gamma correction
-exec --no-startup-id xrandr --output eDP-1 --gamma 1:1:1.15
-
 # bullshit
 bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec Thunar
@@ -231,13 +223,13 @@ bar {
     padding 0 4px 0 0
 
     colors {
-        background #000000CF
+        background #000000
         statusline #ffffff
         separator  #606060
-        focused_workspace   $clr_ac   $clr_ac   $clr_blk
-        active_workspace    #000000CF #000000CF $clr_txt
-        inactive_workspace  #000000CF #000000CF $clr_txt
-        urgent_workspace    #000000CF $clr_urg  $clr_blk
+        focused_workspace   $clr_ac $clr_ac  $clr_blk
+        active_workspace    #000000 #000000  $clr_txt
+        inactive_workspace  #000000 #000000  $clr_txt
+        urgent_workspace    #000000 $clr_urg $clr_blk
     }
 }
 
@@ -251,9 +243,8 @@ exec --no-startup-id dbus-update-activation-environment --all
 exec --no-startup-id fastcompmgr
 exec --no-startup-id dunst
 exec --no-startup-id wall
-exec --no-startup-id dex --autostart --environment i3
 
 exec --no-startup-id nm-applet
 
 ## mpd is at the bottom because it is fucking shit
-exec --no-startup-id ~/.local/bin/sauron
+exec --no-startup-id setpriv --pdeathsig=TERM env ENABLE_MPDSCRIBBLE=1 java -XX:+UseCompactObjectHeaders -XX:+UseZGC -jar ~/.local/share/jars/sauron.jar
