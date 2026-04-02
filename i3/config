@@ -83,7 +83,7 @@ bindsym Shift+Print exec --no-startup-id sh -c 'maim -su "~/Pictures/Screenshots
 bindsym $mod+Print exec --no-startup-id "maim -su | xclip -selection clipboard -t image/png"
 bindsym $mod+Shift+Print exec --no-startup-id sh -c 'maim -u "~/Pictures/Screenshots/Screenshot @ $(date).png"'
 
-bindsym $mod+End exec --no-startup-id i3lock -c 000000
+bindsym $mod+End exec --no-startup-id dm-tool lock
 bindsym $mod+Home exec --no-startup-id hibernate-prompt
 bindsym $mod+Shift+Home exec --no-startup-id hibernate-ram-prompt
 bindsym $mod+Shift+c reload
@@ -236,6 +236,7 @@ bar {
 # services and autostart
 exec --no-startup-id gentoo-pipewire-launcher restart
 exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
+exec --no-startup-id light-locker
 
 ## i don't know if this shit actually does anything but i don't care.
 exec --no-startup-id dbus-update-activation-environment --all
