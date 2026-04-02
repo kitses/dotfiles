@@ -121,7 +121,15 @@ If the buffer visits a file and has unsaved changes, signal an error."
   :hook (emacs-startup . nyan-mode))
 
 (use-package magit
-  :ensure t)
+  :ensure t
+  :config
+  (setq transient-default-level 5
+	magit-diff-refine-hunk t
+	magit-save-repository-buffers nil
+	magit-revision-insert-related-refs nil
+	magit-git-executable (or (executable-find magit-git-executable) "git"))
+  (setq magit-bury-buffer-function
+	(lambda (_) (mapc #'kill-buffer (magit-mode-get-buffers)))))
 
 ;;; languages
 (use-package nix-mode
