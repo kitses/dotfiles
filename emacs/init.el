@@ -14,6 +14,9 @@
   (put 'downcase-region 'disabled nil)
   (put 'upcase-region 'disabled nil)
 
+  ;; shut up
+  (setq ring-bell-function 'ignore)
+
   ;; appearance
   (add-to-list 'default-frame-alist '(font . "Input Mono-8"))
   (when (display-graphic-p)
