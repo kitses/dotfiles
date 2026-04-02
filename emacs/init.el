@@ -85,6 +85,11 @@ If the buffer visits a file and has unsaved changes, signal an error."
   (completion-category-defaults nil)
   (completion-pcm-leading-wildcard t))
 
+(use-package marginalia
+  :ensure t
+  :init
+  (marginalia-mode))
+
 (use-package company
   :ensure t
   :hook (emacs-startup . global-company-mode))
