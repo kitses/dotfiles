@@ -16,6 +16,14 @@
 
   ;; shut up
   (setq ring-bell-function 'ignore)
+  (let ((f (lambda ()
+	     (dolist (n '(" *Messages*" " *Completions*"))
+	       (when-let ((b (get-buffer (substring n 1))))
+		 (when-let ((old (get-buffer n)))
+		   (kill-buffer old))
+		 (with-current-buffer b (rename-buffer n)))))))
+    (add-hook 'buffer-list-update-hook f)
+    (add-hook 'after-init-hook f))
 
   ;; appearance
   (add-to-list 'default-frame-alist '(font . "Input Mono-8"))
