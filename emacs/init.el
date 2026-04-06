@@ -45,23 +45,12 @@
 
   ;; binds
   :bind
-  (("C-x k" . homicide)
-   ("C-x K" . murder)
+  (("C-x K" . murder)
    ("C-+"   . text-scale-increase)
    ("C--"   . text-scale-decrease)
    ("C-0"   . (lambda () (interactive) (text-scale-set 0)))))
 
 ;;; conditioning
-(defun homicide ()
-  "Kill the current buffer immediately without prompting.
-If the buffer visits a file and has unsaved changes, signal an error."
-  (interactive)
-  (let ((buf (current-buffer)))
-    (when (and (buffer-modified-p buf)
-               (buffer-file-name buf))
-      (user-error "Buffer %s has unsaved changes; tranquility for now" (buffer-name buf)))
-    (kill-buffer buf)))
-
 (defun murder ()
   "Kill the current buffer immediately with no regard to unsaved changes."
   (interactive)
@@ -103,7 +92,18 @@ If the buffer visits a file and has unsaved changes, signal an error."
 
 (use-package company
   :ensure t
-  :hook (emacs-startup . global-company-mode))
+  :hook (emacs-startup . global-company-mode)
+  :config
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "en_GB")
+  (setq ispell-alternate-dictionary
+	(expand-file-name "wordlist" user-emacs-directory))
+  (dolist (hook '(markdown-mode-hook org-mode-hook))
+    (add-hook hook
+	      (lambda ()
+		(setq-local company-backends
+			    '((company-ispell company-dabbrev) company-files))
+		(setq-local company-minimum-prefix-length 3)))))
 
 (use-package eglot
   :hook (prog-mode . cerberus))
@@ -111,7 +111,9 @@ If the buffer visits a file and has unsaved changes, signal an error."
 (use-package evil
   :ensure t
   :init
-  (evil-mode))
+  (evil-mode)
+  :custom
+  (setq evil-undo-system 'undo-redo))
 
 ;; non-vital
 (use-package ef-themes
