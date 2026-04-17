@@ -249,4 +249,4 @@ exec --no-startup-id wall
 exec --no-startup-id nm-applet
 
 ## bonequest 2275
-exec --no-startup-id setpriv --pdeathsig=TERM env SCROB=1 perl -e '$SIG{TERM}=sub{kill 15,@p;exit};push @p,fork||exec("mpd","--no-daemon")||die;push @p,fork||exec("mpdscribble","--no-daemon")||die if $ENV{SCROB};wait;kill 15,@p'
+exec --no-startup-id setpriv --pdeathsig=TERM env SCROB=1 ~/.local/bin/seldom
