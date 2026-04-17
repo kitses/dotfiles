@@ -48,8 +48,9 @@ default_floating_border pixel 1
 
 ## colour scheme
 set $clr_bg  #282828
+set $clr_bgl #3c3c3c
 set $clr_txt #ffffff
-set $clr_urg #ffb545
+set $clr_urg #e4859a
 set $clr_blk #000000
 set $clr_foc #0a0a0a
 set $clr_ac  #72dec2
@@ -226,10 +227,10 @@ bar {
         background #000000
         statusline #ffffff
         separator  #606060
-        focused_workspace   $clr_ac $clr_ac  $clr_blk
-        active_workspace    #000000 #000000  $clr_txt
-        inactive_workspace  #000000 #000000  $clr_txt
-        urgent_workspace    #000000 $clr_urg $clr_blk
+        focused_workspace   $clr_bgl $clr_bg  $clr_txt
+        active_workspace    #000000  #000000  $clr_txt
+        inactive_workspace  #000000  #000000  $clr_txt
+        urgent_workspace    #000000  $clr_urg $clr_blk
     }
 }
 
