@@ -18,7 +18,6 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 
 * Terminals
 + [[file:alacritty/][Alacritty]]
-+ [[file:foot/][foot]]
 
 * Window Managers
 + [[file:i3/][i3]]
@@ -27,6 +26,7 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 ** Deprecated
 + [[file:deprecated/sway/][Sway]]
   + [[file:deprecated/waybar][Waybar]]
++ [[file:deprecated/foot/][foot]]
 
 * Other
 + [[file:oldtwitter/][OldTwitter]]
