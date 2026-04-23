@@ -20,6 +20,9 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 + [[file:alacritty/][Alacritty]]
 + [[file:kitty/][kitty]]
 
+** Deprecated
++ [[file:deprecated/foot/][foot]]
+
 * Window Managers
 + [[file:i3/][i3]]
   + [[file:i3/.i3status.conf][i3status]] (depends on [[https://www.nerdfonts.com/][Nerd Fonts symbols]])
@@ -27,7 +30,6 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 ** Deprecated
 + [[file:deprecated/sway/][Sway]]
   + [[file:deprecated/waybar][Waybar]]
-+ [[file:deprecated/foot/][foot]]
 
 * Other
 + [[file:oldtwitter/][OldTwitter]]
