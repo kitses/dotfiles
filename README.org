@@ -18,6 +18,7 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 
 * Terminals
 + [[file:alacritty/][Alacritty]]
++ [[file:kitty/][kitty]]
 
 * Window Managers
 + [[file:i3/][i3]]
