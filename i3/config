@@ -47,17 +47,17 @@ default_border pixel 1
 default_floating_border pixel 1
 
 ## colour scheme
-set $clr_bg  #282828
-set $clr_bgl #3c3c3c
-set $clr_txt #ffffff
-set $clr_urg #e4859a
-set $clr_blk #000000
-set $clr_foc #0a0a0a
-set $clr_ac  #72dec2
+set $clr_bg  #232323
+set $clr_bgl #333333
+set $clr_txt #D7D7D7
+set $clr_urg #E76941
+set $clr_blk #090909
+set $clr_foc #090909
+set $clr_ac  #03C3D5
 
 client.focused           $clr_blk $clr_foc $clr_txt $clr_bg  $clr_txt
-client.focused_inactive  $clr_blk $clr_foc $clr_txt $clr_bg  $clr_txt
-client.unfocused         $clr_blk $clr_blk #777777  $clr_bg  $clr_blk
+client.focused_inactive  $clr_blk $clr_foc $clr_txt $clr_bg  $clr_blk
+client.unfocused         $clr_blk $clr_blk #939393  $clr_bg  $clr_blk
 client.urgent            $clr_blk $clr_urg $clr_blk $clr_blk $clr_blk
 
 # bullshit
@@ -217,20 +217,22 @@ bindsym $mod+r mode "resize"
 
 # status bar
 bar {
+    i3bar_command i3bar -t
     status_command i3status
     separator_symbol " ✷ "
     position top
+    tray_output none
 
     padding 0 4px 0 0
 
     colors {
-        background #000000
-        statusline #ffffff
-        separator  #606060
-        focused_workspace   $clr_bgl $clr_bg  $clr_txt
-        active_workspace    #000000  #000000  $clr_txt
-        inactive_workspace  #000000  #000000  $clr_txt
-        urgent_workspace    #000000  $clr_urg $clr_blk
+        background $clr_blk
+        statusline #D7D7D7
+        separator  #4B4B4B
+        focused_workspace   $clr_bg  $clr_bg  $clr_txt
+        active_workspace    $clr_blk $clr_blk $clr_txt
+        inactive_workspace  $clr_blk $clr_blk #939393
+        urgent_workspace    $clr_urg $clr_urg $clr_blk
     }
 }
 
@@ -245,8 +247,6 @@ exec --no-startup-id dbus-update-activation-environment --all
 exec --no-startup-id fastcompmgr
 exec --no-startup-id dunst
 exec --no-startup-id wall
-
-exec --no-startup-id nm-applet
 
 ## bonequest 2275
 exec --no-startup-id setpriv --pdeathsig=TERM env SCROB=1 ~/.local/bin/seldom
