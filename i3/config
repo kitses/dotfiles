@@ -51,7 +51,7 @@ set $clr_bg  #232323
 set $clr_bgl #333333
 set $clr_txt #D7D7D7
 set $clr_urg #E76941
-set $clr_blk #090909
+set $clr_blk #090909cc
 set $clr_foc #090909
 set $clr_ac  #03C3D5
 
