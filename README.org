@@ -9,6 +9,7 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 + [[file:helix/][Helix]]
 
 * Shells
++ [[file:fish][fish]]
 + [[file:powershell][PowerShell]]
 
 * System
