@@ -1,4 +1,0 @@
-#!/bin/sh
-if [ -r /etc/backlight_level ]; then
-    light -S "$(cat /etc/backlight_level)"
-fi
