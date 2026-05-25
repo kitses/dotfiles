@@ -246,6 +246,3 @@ exec --no-startup-id xsettingsd
 exec --no-startup-id fastcompmgr
 exec --no-startup-id dunst
 exec --no-startup-id wall
-
-## bonequest 2275
-exec --no-startup-id setpriv --pdeathsig=TERM env SCROB=1 ~/.local/bin/seldom

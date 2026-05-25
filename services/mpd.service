@@ -1,0 +1,12 @@
+[Unit]
+Description=Music Player Daemon
+Documentation=man:mpd(1) man:mpd.conf(5)
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/mpd --no-daemon %h/.config/mpd/mpd.conf
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=default.target

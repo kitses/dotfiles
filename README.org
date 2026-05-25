@@ -12,11 +12,6 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 + [[file:fish][fish]]
 + [[file:powershell][PowerShell]]
 
-* System
-+ [[file:openrc/][OpenRC Services]]
-  + [[file:openrc/nix-daemon][nix-daemon]]
-  + [[file:openrc/restore-backlight][restore-backlight]] (depends on [[file:bin/restore-backlight][bin/restore-backlight]] & [[https://packages.gentoo.org/packages/dev-libs/light][dev-libs/light]])
-
 * Terminals
 + [[file:alacritty/][Alacritty]]
 + [[file:kitty/][kitty]]
@@ -33,4 +28,4 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
   + [[file:deprecated/waybar][Waybar]]
 
 * Other
-+ [[file:oldtwitter/][OldTwitter]]
++ [[file:services/][systemd User Services]]
