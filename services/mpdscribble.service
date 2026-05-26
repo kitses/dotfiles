@@ -4,11 +4,10 @@ Documentation=man:mpdscribble(1)
 Requires=mpd.service
 After=mpd.service
 PartOf=mpd.service
+ConditionPathIsSocket=%h/.local/state/mpd/socket
 
 [Service]
-Type=simple
-# kapiche?
-ExecStartPre=/bin/sh -c 'i=0; while [ "$i" -lt 100 ]; do printf "ping\nclose\n" | socat - "UNIX-CONNECT:%h/.local/state/mpd/socket" >/dev/null 2>&1 && exit 0; i=$((i + 1)); sleep 0.1; done; exit 1'
+Type=exec
 ExecStart=/usr/bin/mpdscribble --no-daemon --conf %h/.config/mpdscribble/mpdscribble.conf
 Restart=on-failure
 RestartSec=2s
