@@ -64,7 +64,8 @@ client.urgent            $clr_blk $clr_urg $clr_blk $clr_blk $clr_blk
 bindsym $mod+Return exec kitty
 bindsym $mod+Shift+Return exec Thunar
 bindsym $mod+d exec --no-startup-id rofi -show drun -drun-display-format {name}
-bindsym $mod+p exec rofi -show rofi-power-menu -modes "rofi-power-menu:~/.local/bin/rofi-power-menu"
+bindsym $mod+c exec --no-startup-id rofi -show window
+bindsym $mod+p exec --no-startup-id rofi -show rofi-power-menu -modes "rofi-power-menu:~/.local/bin/rofi-power-menu"
 bindsym $mod+period exec rofi -modes emoji -show emoji
 
 bindsym $mod+q kill
