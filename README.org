@@ -28,4 +28,5 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
   + [[file:deprecated/waybar][Waybar]]
 
 * Other
++ [[file:rofi/][Rofi Theme (singular)]]
 + [[file:services/][systemd User Services]]
