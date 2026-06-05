@@ -23,10 +23,9 @@
 }
 
 window {
-    location: north;
-    anchor: north;
-    width: 760px;
-    y-offset: 27px;
+    location: center;
+    anchor: center;
+    width: 640px;
 
     background-color: @bg0;
     border: 1px;
@@ -93,7 +92,7 @@ listview {
     lines: 8;
     columns: 1;
 
-    fixed-height: false;
+    fixed-height: true;
     dynamic: true;
     cycle: false;
     scrollbar: false;
