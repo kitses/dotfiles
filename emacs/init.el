@@ -151,7 +151,8 @@
   :ensure t)
 
 (use-package emmet-mode
-  :ensure t)
+  :ensure t
+  :hook (html-mode . emmet-mode))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
