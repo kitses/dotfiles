@@ -46,15 +46,6 @@
     (set-buffer-modified-p nil)
     (kill-buffer buf)))
 
-;; eglot
-(defun cerberus ()
-  (require 'eglot)
-  (condition-case _
-      (progn
-        (eglot--guess-contact)
-        (eglot-ensure))
-    (error nil)))
-
 ;;; packages
 (use-package vertico
   :ensure t
@@ -91,7 +82,7 @@
 		(setq-local company-minimum-prefix-length 3)))))
 
 (use-package eglot
-  :hook (prog-mode . cerberus))
+  :hook (prog-mode . eglot-ensure))
 
 (use-package evil
   :ensure t
