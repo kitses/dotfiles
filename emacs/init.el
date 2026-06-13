@@ -1,13 +1,8 @@
-;;; -*- lexical-binding: t; -*-
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
+;;; -*- lexical-binding: t -*-
 
 ;;; built-in settings
 (use-package emacs
   :init
-  (setq inhibit-startup-screen t)
   (setq make-backup-files nil)
   (setq auto-save-default nil)
   (setq mouse-autoselect-window t)
@@ -18,19 +13,15 @@
   (setq ring-bell-function 'ignore)
   (let ((f (lambda ()
 	     (dolist (n '(" *Messages*" " *Completions*"))
-	       (when-let ((b (get-buffer (substring n 1))))
-		 (when-let ((old (get-buffer n)))
+	       (when-let* ((b (get-buffer (substring n 1))))
+		 (when-let* ((old (get-buffer n)))
 		   (kill-buffer old))
 		 (with-current-buffer b (rename-buffer n)))))))
     (add-hook 'buffer-list-update-hook f)
     (add-hook 'after-init-hook f))
 
   ;; appearance
-  (add-to-list 'default-frame-alist '(font . "Input Mono-8"))
-  (when (display-graphic-p)
-    (tool-bar-mode -1)
-    (menu-bar-mode -1)
-    (scroll-bar-mode -1))
+  (add-to-list 'default-frame-alist '(font . "Iosevka Extended-9"))
   (column-number-mode)
   (setq-default display-line-numbers-width 3)
   (setq-default display-line-numbers-grow-only t)
@@ -40,13 +31,10 @@
               (when (buffer-file-name)
                 (display-line-numbers-mode 1))))
 
-  (setq initial-scratch-message nil
-	initial-major-mode 'text-mode)
-
   ;; binds
   :bind
   (("C-x K" . murder)
-   ("C-+"   . text-scale-increase)
+   ("C-="   . text-scale-increase)
    ("C--"   . text-scale-decrease)
    ("C-0"   . (lambda () (interactive) (text-scale-set 0)))))
 
@@ -70,12 +58,10 @@
 ;;; packages
 (use-package vertico
   :ensure t
-  :init
-  (vertico-mode))
+  :hook (after-init . vertico-mode))
 
 (use-package savehist
-  :init
-  (savehist-mode))
+  :hook (after-init . savehist-mode))
 
 (use-package orderless
   :ensure t
@@ -87,8 +73,7 @@
 
 (use-package marginalia
   :ensure t
-  :init
-  (marginalia-mode))
+  :hook (after-init . marginalia-mode))
 
 (use-package company
   :ensure t
@@ -110,8 +95,7 @@
 
 (use-package evil
   :ensure t
-  :init
-  (evil-mode)
+  :hook (after-init . evil-mode)
   :custom
   (setq evil-undo-system 'undo-redo))
 
@@ -135,6 +119,7 @@
 
 (use-package magit
   :ensure t
+  :defer t
   :config
   (setq transient-default-level 5
 	magit-diff-refine-hunk t
@@ -144,7 +129,18 @@
   (setq magit-bury-buffer-function
 	(lambda (_) (mapc #'kill-buffer (magit-mode-get-buffers)))))
 
+(use-package eat
+  :ensure t
+  :defer t)
+
+(use-package htmlize
+  :ensure t
+  :defer t)
+
 ;;; languages
+(use-package markdown-mode
+  :ensure t)
+
 (use-package nix-mode
   :ensure t)
 
@@ -153,6 +149,10 @@
 
 (use-package typescript-mode
   :ensure t)
+
+(use-package emmet-mode
+  :ensure t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
