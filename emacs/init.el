@@ -96,6 +96,24 @@
   :custom
   (setq evil-undo-system 'undo-redo))
 
+(use-package multiple-cursors
+  :after evil
+  :custom
+  (mc/always-run-for-all t)
+  (mc/always-repeat-command t)
+  :config
+  (define-key evil-normal-state-map (kbd "M-n") #'mc/mark-next-like-this)
+  (define-key evil-visual-state-map (kbd "M-n") #'mc/mark-next-like-this)
+  (define-key evil-normal-state-map (kbd "M-p") #'mc/mark-previous-like-this)
+  (define-key evil-visual-state-map (kbd "M-p") #'mc/mark-previous-like-this)
+  (define-key evil-normal-state-map (kbd "M-A") #'mc/mark-all-like-this)
+  (define-key evil-visual-state-map (kbd "M-A") #'mc/mark-all-like-this)
+  (define-key evil-normal-state-map (kbd "M-s") #'mc/skip-to-next-like-this)
+  (define-key evil-visual-state-map (kbd "M-s") #'mc/skip-to-next-like-this)
+  (define-key evil-normal-state-map (kbd "M-u") #'mc/unmark-next-like-this)
+  (define-key evil-visual-state-map (kbd "M-u") #'mc/unmark-next-like-this)
+  (define-key mc/keymap (kbd "C-c") #'mc/keyboard-quit))
+
 ;; non-vital
 (use-package ef-themes
   :ensure t
