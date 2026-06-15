@@ -92,6 +92,8 @@
 
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-keybinding nil)
   :hook (after-init . evil-mode)
   :custom
   (setq evil-undo-system 'undo-redo))
