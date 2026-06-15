@@ -96,6 +96,12 @@
   :custom
   (setq evil-undo-system 'undo-redo))
 
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :config
+  (evil-collection-init 'magit))
+
 (use-package multiple-cursors
   :after evil
   :custom
