@@ -21,7 +21,7 @@
     (add-hook 'after-init-hook f))
 
   ;; appearance
-  (add-to-list 'default-frame-alist '(font . "Adwaita Mono-9"))
+  (add-to-list 'default-frame-alist '(font . "Input Mono-8"))
   (column-number-mode)
   (setq-default display-line-numbers-width 3)
   (setq-default display-line-numbers-grow-only t)
