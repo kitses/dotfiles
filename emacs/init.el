@@ -103,6 +103,7 @@
   (evil-collection-init 'magit))
 
 (use-package multiple-cursors
+  :ensure t
   :after evil
   :custom
   (mc/always-run-for-all t)
