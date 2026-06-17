@@ -137,7 +137,7 @@
   :config
   (setq modus-themes-mixed-fonts nil)
   (setq modus-themes-italic-constructs t)
-  (modus-themes-load-theme 'ef-bio))
+  (modus-themes-load-theme 'ef-elea-dark))
 
 (use-package nyan-mode
   :ensure t
