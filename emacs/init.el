@@ -46,6 +46,8 @@
     (set-buffer-modified-p nil)
     (kill-buffer buf)))
 
+(electric-pair-mode 1)
+
 ;;; packages
 (use-package exec-path-from-shell
   :ensure t
