@@ -14,7 +14,7 @@
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
 (push '(width . 120) default-frame-alist)
-(push '(height . 40) default-frame-alist)
+(push '(height . 35) default-frame-alist)
 
 (setq inhibit-startup-screen t
       initial-scratch-message nil
