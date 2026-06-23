@@ -104,7 +104,7 @@
   :ensure t
   :after evil
   :config
-  (evil-collection-init 'magit))
+  (evil-collection-init '(magit dired)))
 
 (use-package multiple-cursors
   :ensure t
