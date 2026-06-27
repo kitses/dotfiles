@@ -13,19 +13,19 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 + [[file:powershell][PowerShell]]
 
 * Terminals
-+ [[file:alacritty/][Alacritty]]
 + [[file:kitty/][kitty]]
++ [[file:deprecated/foot/][foot]]
 
 ** Deprecated
-+ [[file:deprecated/foot/][foot]]
++ [[file:alacritty/][Alacritty]]
 
 * Window Managers
 + [[file:i3/][i3]]
   + [[file:i3/.i3status.conf][i3status]]
++ [[file:deprecated/sway/][Sway]]
 
 ** Deprecated
-+ [[file:deprecated/sway/][Sway]]
-  + [[file:deprecated/waybar][Waybar]]
++ [[file:deprecated/waybar][Waybar]]
 
 * Other
 + [[file:rofi/][Rofi Theme (singular)]]
