@@ -1,7 +1,3 @@
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SSH_AUTH_SOCK
-exec dex --autostart --environment sway
-seat seat0 xcursor_theme Adwaita 24
-
 # variables
 set $mod Mod4
 
@@ -40,9 +36,7 @@ set $ws28 "28"
 set $ws29 "29"
 set $ws30 "30"
 
-# configuration
-## window mechanics and decos
-floating_modifier $mod normal
+floating_modifier $mod
 
 tiling_drag enable
 
@@ -51,44 +45,29 @@ default_border pixel 1
 default_floating_border pixel 1
 
 ## colour scheme
-set $clr_bg  #282828
-set $clr_txt #ffffff
-set $clr_urg #e45461
-set $clr_blk #000000
-set $clr_foc #0a0a0a
-set $clr_ac  #4a019c
+set $clr_bg  #232323
+set $clr_bgl #333333
+set $clr_txt #D7D7D7
+set $clr_urg #E76941
+set $clr_blk #090909cc
+set $clr_foc #090909
+set $clr_ac  #03C3D5
 
-client.focused           $clr_blk $clr_foc $clr_txt $clr_bg $clr_txt
-client.focused_inactive  $clr_blk $clr_foc $clr_txt $clr_bg $clr_txt
-client.unfocused         $clr_blk $clr_blk #777777  $clr_bg $clr_blk
+client.focused           $clr_blk $clr_foc $clr_txt $clr_bg  $clr_txt
+client.focused_inactive  $clr_blk $clr_foc $clr_txt $clr_bg  $clr_blk
+client.unfocused         $clr_blk $clr_blk #939393  $clr_bg  $clr_blk
 client.urgent            $clr_blk $clr_urg $clr_blk $clr_blk $clr_blk
 
-## input config
-input type:touchpad {
-    natural_scroll enabled
-    tap enabled
-    accel_profile flat
-}
-
-input "1133:49292:Logitech_G_PRO_Gaming_Mouse" {
-    accel_profile "flat"
-    pointer_accel 0
-}
-
-## wallpaper
-# output * bg [INSERT IMAGE HERE] fill #000000
-
-## font rendering
+# output
+output * bg [anything here] fill
 output * subpixel none
-
-# gamma correction (if needed)
-exec gammastep -g 1.0:1.0:1.16 -O 6500
 
 # bullshit
 bindsym $mod+Return exec foot
 bindsym $mod+Shift+Return exec Thunar
-bindsym $mod+d exec rofi -show drun -drun-display-format {name}
-bindsym $mod+p exec rofi -show rofi-power-menu -modes "rofi-power-menu:~/.local/bin/rofi-power-menu"
+bindsym $mod+d exec --no-startup-id rofi -show drun -drun-display-format {name}
+bindsym $mod+c exec --no-startup-id rofi -show window
+bindsym $mod+p exec --no-startup-id rofi -show rofi-power-menu -modes "rofi-power-menu:~/.local/bin/rofi-power-menu"
 bindsym $mod+period exec rofi -modes emoji -show emoji
 
 bindsym $mod+q kill
@@ -104,28 +83,29 @@ bindsym $mod+e layout toggle split
 bindsym $mod+a focus parent
 
 # screenshots
-bindsym Print exec grim - | wl-copy
-bindsym Shift+Print exec grim "~/Pictures/Screenshots/Screenshot @ $(date).png"
-bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy
-bindsym $mod+Shift+Print exec grim -g "$(slurp)" "~/Pictures/Screenshots/Screenshot @ $(date).png"
+bindsym Print exec --no-startup-id "grim - | wl-copy -t image/png"
+bindsym Shift+Print exec --no-startup-id sh -c 'grim -g "$(slurp)" "$HOME/Pictures/Screenshots/Screenshot @ $(date).png"'
+bindsym $mod+Print exec --no-startup-id sh -c 'grim -g "$(slurp)" - | wl-copy -t image/png'
+bindsym $mod+Shift+Print exec --no-startup-id sh -c 'grim "$HOME/Pictures/Screenshots/Screenshot @ $(date).png"'
 
-bindsym $mod+End exec swaylock
-bindsym $mod+Home exec hibernate-prompt
-bindsym $mod+Shift+Home exec hibernate-ram-prompt
+bindsym $mod+End exec --no-startup-id dm-tool lock
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit Sway? This will end your Wayland session.' -B 'Yes, exit Sway' 'swaymsg exit'
+
+## mullvad is a piece of shit
+bindsym $mod+Mod1+r exec --no-startup-id mullvad reconnect
 
 # hw keys
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym $mod+XF86AudioMute exec pactl set-sink-volume @DEFAULT_SINK@ 50% && $refresh_i3status
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym $mod+XF86AudioMute exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ 50% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 
-bindsym XF86MonBrightnessUp exec light -A 2 && light -G > /etc/backlight_level
-bindsym XF86MonBrightnessDown exec light -U 2 && light -G > /etc/backlight_level
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +2.5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 2.5%-
 
 # navigation
 bindsym $mod+j focus left
@@ -237,31 +217,41 @@ bindsym $mod+r mode "resize"
 
 # status bar
 bar {
-    swaybar_command waybar
-    # status_command i3status
-    # separator_symbol "⛧"
-    # height 18
+    status_command i3status
+    separator_symbol " ✷ "
+    position bottom
 
-    # colors {
-    #     background #000000
-    #     statusline #ffffff
-    #     separator  #808080
-    #     focused_workspace   $clr_ac  $clr_ac  $clr_txt
-    #     active_workspace    $clr_blk $clr_blk $clr_txt
-    #     inactive_workspace  $clr_blk $clr_blk $clr_txt
-    #     urgent_workspace    $clr_blk $clr_urg $clr_blk
-    # }
+    colors {
+        background $clr_blk
+        statusline #D7D7D7
+        separator  #4B4B4B
+        focused_workspace   $clr_bg  $clr_bg  $clr_txt
+        active_workspace    $clr_blk $clr_blk $clr_txt
+        inactive_workspace  $clr_blk $clr_blk #939393
+        urgent_workspace    $clr_urg $clr_urg $clr_blk
+    }
 }
 
-# services and autostart
-exec gentoo-pipewire-launcher restart
-exec /usr/libexec/polkit-mate-authentication-agent-1
-exec dunst
-exec nm-applet
-exec ENABLE_MPDSCRIBBLE=1 ~/.local/bin/sauron
+# input devices
+input "1739:0:Synaptics_TM3276-022" {
+    accel_profile flat
+    natural_scroll enabled
+    tap enabled
+}
 
+input type:pointer {
+    accel_profile flat
+    pointer_accel 0
+}
+
+# window configs
 for_window [title="^Picture-in-(?i)Picture$"] floating enable, sticky enable, border none
 
-# misc
-## mullvad is a piece of shit
-bindsym $mod+Mod1+r exec mullvad reconnect
+# services and autostart
+exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
+exec --no-startup-id swayidle -w timeout 300 'dm-tool lock' before-sleep 'dm-tool lock'
+exec --no-startup-id dunst
+exec --no-startup-id setpriv --pdeathsig=TERM gammastep
+
+## i don't know if this shit actually does anything but i don't care.
+exec --no-startup-id dbus-update-activation-environment --all
