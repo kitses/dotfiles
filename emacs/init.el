@@ -74,6 +74,9 @@
   :ensure t
   :hook (after-init . marginalia-mode))
 
+(use-package which-key
+  :hook (after-init . which-key-mode))
+
 (use-package company
   :ensure t
   :hook (emacs-startup . global-company-mode)
