@@ -22,6 +22,12 @@
     (add-hook 'buffer-list-update-hook f)
     (add-hook 'after-init-hook f))
 
+  ;; ispell
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "en_GB")
+  (setq ispell-alternate-dictionary
+	(expand-file-name "wordlist" user-emacs-directory))
+
   ;; appearance
   (add-to-list 'default-frame-alist '(font . "Input Mono-8"))
   (column-number-mode)
@@ -78,10 +84,6 @@
 (use-package company
   :hook (emacs-startup . global-company-mode)
   :config
-  (setq ispell-program-name "hunspell")
-  (setq ispell-dictionary "en_GB")
-  (setq ispell-alternate-dictionary
-	(expand-file-name "wordlist" user-emacs-directory))
   (dolist (hook '(markdown-mode-hook org-mode-hook))
     (add-hook hook
 	      (lambda ()
@@ -97,7 +99,7 @@
   (setq evil-want-keybinding nil)
   :hook (after-init . evil-mode)
   :custom
-  (setq evil-undo-system 'undo-redo))
+  (evil-undo-system 'undo-redo))
 
 (use-package evil-collection
   :after evil
