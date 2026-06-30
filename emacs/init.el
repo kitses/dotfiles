@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
+(setq straight-use-package-by-default t)
+
 ;;; built-in settings
 (use-package emacs
   :init
@@ -50,20 +52,17 @@
 
 ;;; packages
 (use-package exec-path-from-shell
-  :ensure t
   :init
   (setq exec-path-from-shell-arguments '("-l"))
   (exec-path-from-shell-initialize))
 
 (use-package vertico
-  :ensure t
   :hook (after-init . vertico-mode))
 
 (use-package savehist
   :hook (after-init . savehist-mode))
 
 (use-package orderless
-  :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles partial-completion))))
@@ -71,14 +70,12 @@
   (completion-pcm-leading-wildcard t))
 
 (use-package marginalia
-  :ensure t
   :hook (after-init . marginalia-mode))
 
 (use-package which-key
   :hook (after-init . which-key-mode))
 
 (use-package company
-  :ensure t
   :hook (emacs-startup . global-company-mode)
   :config
   (setq ispell-program-name "hunspell")
@@ -96,7 +93,6 @@
   :hook (prog-mode . eglot-ensure))
 
 (use-package evil
-  :ensure t
   :init
   (setq evil-want-keybinding nil)
   :hook (after-init . evil-mode)
@@ -104,13 +100,11 @@
   (setq evil-undo-system 'undo-redo))
 
 (use-package evil-collection
-  :ensure t
   :after evil
   :config
   (evil-collection-init '(magit dired)))
 
 (use-package multiple-cursors
-  :ensure t
   :after evil
   :custom
   (mc/always-run-for-all t)
@@ -130,7 +124,6 @@
 
 ;; non-vital
 (use-package ef-themes
-  :ensure t
   :init
   (ef-themes-take-over-modus-themes-mode 1)
   :bind
@@ -143,11 +136,9 @@
   (modus-themes-load-theme 'ef-elea-dark))
 
 (use-package nyan-mode
-  :ensure t
   :hook (emacs-startup . nyan-mode))
 
 (use-package magit
-  :ensure t
   :defer t
   :config
   (setq transient-default-level 5
@@ -159,39 +150,32 @@
 	(lambda (_) (mapc #'kill-buffer (magit-mode-get-buffers)))))
 
 (use-package eat
-  :ensure t
   :defer t)
 
 (use-package htmlize
-  :ensure t
   :defer t)
 
 ;;; languages
-(use-package markdown-mode
-  :ensure t)
+(use-package markdown-mode)
 
-(use-package nix-mode
-  :ensure t)
+(use-package nix-mode)
 
-(use-package rust-mode
-  :ensure t)
+(use-package rust-mode)
 
-(use-package typescript-mode
-  :ensure t)
+(use-package typescript-mode)
 
 (use-package emmet-mode
-  :ensure t
   :hook (html-mode . emmet-mode))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(warning-suppress-log-types '((native-compiler))))
