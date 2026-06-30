@@ -13,14 +13,22 @@
 
   ;; shut up
   (setq ring-bell-function 'ignore)
-  (let ((f (lambda ()
-	     (dolist (n '(" *Messages*" " *Completions*"))
-	       (when-let* ((b (get-buffer (substring n 1))))
-		 (when-let* ((old (get-buffer n)))
-		   (kill-buffer old))
-		 (with-current-buffer b (rename-buffer n)))))))
-    (add-hook 'buffer-list-update-hook f)
-    (add-hook 'after-init-hook f))
+  (let ((busy nil)
+	(buffers '(("*Messages*" . " *Messages*")
+                   ("*Completions*" . " *Completions*")
+                   ("*Warnings*" . " *Warnings*")
+                   ("*straight-process*" . " *straight-process*"))))
+    (let ((f (lambda ()
+               (unless busy
+		 (let ((busy t))
+                   (dolist (pair buffers)
+                     (when-let* ((buf (get-buffer (car pair))))
+                       (when-let* ((old (get-buffer (cdr pair))))
+			 (kill-buffer old))
+                       (with-current-buffer buf
+			 (rename-buffer (cdr pair))))))))))
+      (add-hook 'buffer-list-update-hook f)
+      (add-hook 'after-init-hook f)))
 
   ;; ispell
   (setq ispell-program-name "hunspell")
