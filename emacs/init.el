@@ -1,5 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
+(setq custom-file (expand-file-name "config.el" user-emacs-directory))
+
 (setq straight-use-package-by-default t)
 
 ;;; built-in settings
@@ -16,7 +18,6 @@
   (let ((busy nil)
 	(buffers '(("*Messages*" . " *Messages*")
                    ("*Completions*" . " *Completions*")
-                   ("*Warnings*" . " *Warnings*")
                    ("*straight-process*" . " *straight-process*"))))
     (let ((f (lambda ()
                (unless busy
@@ -62,6 +63,7 @@
     (set-buffer-modified-p nil)
     (kill-buffer buf)))
 
+(global-visual-line-mode 1)
 (electric-pair-mode 1)
 
 ;;; packages
@@ -100,14 +102,20 @@
 		(setq-local company-minimum-prefix-length 3)))))
 
 (use-package eglot
-  :hook (prog-mode . eglot-ensure))
+  :hook ((prog-mode astro-mode) . eglot-ensure)
+  :config
+  (add-to-list 'eglot-server-programs
+               '(astro-mode . ("astro-ls" "--stdio"
+                               :initializationOptions
+                               (:typescript (:tsdk "./node_modules/typescript/lib"))))))
 
 (use-package evil
   :init
   (setq evil-want-keybinding nil)
   :hook (after-init . evil-mode)
   :custom
-  (evil-undo-system 'undo-redo))
+  (evil-undo-system 'undo-redo)
+  (evil-respect-visual-line-mode t))
 
 (use-package evil-collection
   :after evil
@@ -177,15 +185,11 @@
 (use-package emmet-mode
   :hook (html-mode . emmet-mode))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(warning-suppress-log-types '((native-compiler))))
+(use-package web-mode)
+
+(define-derived-mode astro-mode web-mode "Astro"
+  "Major mode for editing Astro components.")
+
+(add-to-list 'auto-mode-alist '("\\.astro\\'" . astro-mode))
+
+(load custom-file 'noerror)
