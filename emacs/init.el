@@ -115,7 +115,9 @@
   :hook (after-init . evil-mode)
   :custom
   (evil-undo-system 'undo-redo)
-  (evil-respect-visual-line-mode t))
+  (evil-respect-visual-line-mode t)
+  :config
+  (define-key evil-normal-state-map (kbd "%") (kbd "ggVG")))
 
 (use-package evil-collection
   :after evil
