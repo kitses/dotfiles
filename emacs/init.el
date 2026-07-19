@@ -106,6 +106,8 @@
   :hook ((prog-mode astro-mode) . eglot-ensure)
   :config
   (add-to-list 'eglot-server-programs
+               '(kotlin-mode . ("kotlin-lsp" "--stdio")))
+  (add-to-list 'eglot-server-programs
                '(astro-mode . ("astro-ls" "--stdio"
                                :initializationOptions
                                (:typescript (:tsdk "./node_modules/typescript/lib"))))))
@@ -182,6 +184,8 @@
 (use-package nix-mode)
 
 (use-package rust-mode)
+
+(use-package kotlin-mode)
 
 (use-package typescript-mode)
 
