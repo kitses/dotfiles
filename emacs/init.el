@@ -21,13 +21,15 @@
                    ("*straight-process*" . " *straight-process*"))))
     (let ((f (lambda ()
                (unless busy
-		 (let ((busy t))
-                   (dolist (pair buffers)
-                     (when-let* ((buf (get-buffer (car pair))))
-                       (when-let* ((old (get-buffer (cdr pair))))
-			 (kill-buffer old))
-                       (with-current-buffer buf
-			 (rename-buffer (cdr pair))))))))))
+		 (setq busy t)
+                 (unwind-protect
+                     (dolist (pair buffers)
+                       (when-let* ((buf (get-buffer (car pair))))
+                         (when-let* ((old (get-buffer (cdr pair))))
+			   (kill-buffer old))
+                         (with-current-buffer buf
+			   (rename-buffer (cdr pair)))))
+                   (setq busy nil))))))
       (add-hook 'buffer-list-update-hook f)
       (add-hook 'after-init-hook f)))
 
