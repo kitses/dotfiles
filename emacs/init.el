@@ -7,14 +7,14 @@
 ;;; built-in settings
 (use-package emacs
   :init
-  (setq make-backup-files nil)
-  (setq auto-save-default nil)
-  (setq mouse-autoselect-window t)
+  (setq make-backup-files nil
+	auto-save-default nil
+	mouse-autoselect-window t
+	ring-bell-function #'ignore)
   (put 'downcase-region 'disabled nil)
   (put 'upcase-region 'disabled nil)
 
   ;; shut up
-  (setq ring-bell-function 'ignore)
   (let ((busy nil)
 	(buffers '(("*Messages*" . " *Messages*")
                    ("*Completions*" . " *Completions*")
