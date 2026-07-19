@@ -65,7 +65,6 @@
     (set-buffer-modified-p nil)
     (kill-buffer buf)))
 
-(global-visual-line-mode 1)
 (electric-pair-mode 1)
 
 ;;; packages
