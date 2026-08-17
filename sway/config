@@ -188,8 +188,11 @@ input type:pointer {
     pointer_accel 0
 }
 
+seat * hide_cursor when-typing enable
+
 # window configs
 for_window [title="^Picture-in-(?i)Picture$"] floating enable, sticky enable, border none
+for_window [shell=".*"] inhibit_idle fullscreen
 
 # services and autostart
 exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
