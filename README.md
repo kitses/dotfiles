@@ -15,7 +15,7 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 ## Terminals
 
 - [kitty](kitty/)
-- [foot](deprecated/foot/)
+- [foot](foot/)
 
 ### Deprecated
 
@@ -25,7 +25,7 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 
 - [i3](i3/)
   - [i3status](i3/.i3status.conf)
-- [Sway](deprecated/sway/)
+- [Sway](sway/)
 
 ### Deprecated
 
