@@ -35,5 +35,5 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 ## Other
 
 - [Rofi Theme (singular)](rofi/)
-- [Programs](bin/)
 - [systemd User Services](services/)
+- [Programs](bin/)
