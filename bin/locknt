@@ -1,0 +1,4 @@
+#!/bin/sh
+
+active=$(loginctl show-session "$XDG_SESSION_ID" -p Active --value 2>/dev/null)
+[ "$active" = no ] || exec dm-tool lock

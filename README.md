@@ -26,6 +26,7 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 - [i3](i3/)
   - [i3status](i3/.i3status.conf)
 - [Sway](sway/)
+  - Depends on [locknt](bin/locknt)
 
 ### Deprecated
 
@@ -34,4 +35,5 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 ## Other
 
 - [Rofi Theme (singular)](rofi/)
+- [Programs](bin/)
 - [systemd User Services](services/)
