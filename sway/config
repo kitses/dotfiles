@@ -198,7 +198,7 @@ for_window [shell=".*"] inhibit_idle fullscreen
 
 # services and autostart
 exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
-exec --no-startup-id swayidle -w timeout 300 '$HOME/.local/bin/locknt' timeout 330 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' before-sleep '$HOME/.local/bin/locknt'
+exec --no-startup-id swayidle -w timeout 300 '$HOME/.local/bin/locknt' resume 'swaymsg "output * power on"' before-sleep '$HOME/.local/bin/locknt'
 exec --no-startup-id dunst
 exec --no-startup-id setpriv --pdeathsig=TERM gammastep
 
