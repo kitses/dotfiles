@@ -47,8 +47,10 @@
   (setq-default display-line-numbers-type 'relative)
   (add-hook 'after-change-major-mode-hook
             (lambda ()
-              (when (buffer-file-name)
-                (display-line-numbers-mode 1))))
+              (when (and (buffer-file-name)
+                         (not (derived-mode-p 'pdf-view-mode)))
+                (display-line-numbers-mode 1)
+                (buffer-face-set '(:height 100)))))
 
   ;; binds
   :bind
@@ -177,6 +179,11 @@
 
 (use-package htmlize
   :defer t)
+
+(use-package pdf-tools
+  :hook (pdf-view-mode . auto-revert-mode)
+  :config
+  (pdf-tools-install))
 
 ;;; languages
 (use-package markdown-mode)
