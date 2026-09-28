@@ -158,7 +158,7 @@
   :config
   (setq modus-themes-mixed-fonts nil)
   (setq modus-themes-italic-constructs t)
-  (modus-themes-load-theme 'ef-elea-dark))
+  (modus-themes-load-theme 'ef-rosa))
 
 (use-package nyan-mode
   :hook (emacs-startup . nyan-mode))
