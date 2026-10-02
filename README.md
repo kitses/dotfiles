@@ -26,7 +26,7 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 - [i3](i3/)
   - [i3status](i3/.i3status.conf)
 - [Sway](sway/)
-  - Depends on [locknt](bin/locknt)
+  - Depends on [swaylock](swaylock/)
 
 ### Deprecated
 

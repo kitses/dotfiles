@@ -1,7 +1,7 @@
 include /etc/sway/config.d/*
 
 # variables
-set $mod Mod4
+set $mod Mod3
 
 font pango:Input Mono Compressed Extra-Condensed 8
 
@@ -59,7 +59,7 @@ bindsym Shift+Print exec --no-startup-id sh -c 'grim -g "$(slurp)" "$HOME/Pictur
 bindsym $mod+Print exec --no-startup-id sh -c 'grim -g "$(slurp)" - | wl-copy -t image/png'
 bindsym $mod+Shift+Print exec --no-startup-id sh -c 'grim "$HOME/Pictures/Screenshots/Screenshot @ $(date).png"'
 
-bindsym $mod+End exec --no-startup-id $HOME/.local/bin/locknt
+bindsym $mod+End exec --no-startup-id swaylock -f
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit Sway? This will end your Wayland session.' -B 'Yes, exit Sway' 'swaymsg exit'
 
@@ -168,9 +168,10 @@ bar {
     position bottom
 
     colors {
-        background $clr_blk
-        statusline #D7D7D7
-        separator  #4B4B4B
+        background   $clr_blk
+        statusline   #D7D7D7
+        separator    #4B4B4B
+        binding_mode        $clr_ac  $clr_ac  $clr_blk
         focused_workspace   $clr_bg  $clr_bg  $clr_txt
         active_workspace    $clr_blk $clr_blk $clr_txt
         inactive_workspace  $clr_blk $clr_blk #939393
@@ -183,6 +184,10 @@ input "1739:0:Synaptics_TM3276-022" {
     accel_profile flat
     natural_scroll enabled
     tap enabled
+}
+
+input type:keyboard {
+    xkb_file /home/kit/.config/sway/caps-mod3.xkb
 }
 
 input type:pointer {
@@ -198,7 +203,7 @@ for_window [shell=".*"] inhibit_idle fullscreen
 
 # services and autostart
 exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
-exec --no-startup-id swayidle -w timeout 300 '$HOME/.local/bin/locknt' resume 'swaymsg "output * power on"' before-sleep '$HOME/.local/bin/locknt'
+exec --no-startup-id swayidle -w timeout 300 'swaylock -f' resume 'swaymsg "output * power on"' before-sleep 'swaylock -f'
 exec --no-startup-id dunst
 exec --no-startup-id setpriv --pdeathsig=TERM gammastep
 

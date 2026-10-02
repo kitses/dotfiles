@@ -1,0 +1,12 @@
+xkb_keymap {
+    xkb_keycodes { include "evdev" };
+    xkb_types    { include "complete" };
+    xkb_compat   { include "complete" };
+    xkb_symbols  {
+        include "pc+us+inet(evdev)"
+        replace key <CAPS> { [ Hyper_L ], type[group1] = "ONE_LEVEL" };
+        modifier_map None { <CAPS> };
+        modifier_map Mod3 { <CAPS> };
+    };
+    xkb_geometry { include "pc(pc105)" };
+};
