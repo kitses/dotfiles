@@ -1,0 +1,38 @@
+tabbar tabbox {
+  background-color: #222222;
+  color: #808080;
+  font-family: Iosevka, monospace;
+}
+
+tabbar tabbox tab {
+  background-color: #2b2b2b;
+  color: #808080;
+}
+
+tabbar tabbox tab:hover {
+  background-color: #333333;
+  color: #dddddd;
+}
+
+tabbar tabbox tab:selected {
+  background-color: #d27b9b;
+  color: #222222;
+}
+
+tabbar tabbox tab:selected label {
+  font-weight: bold;
+}
+
+tabbar tabbox tab label {
+  font-size: 12px;
+}
+
+tabbar tabbox button {
+  background-color: transparent;
+  color: #626262;
+}
+
+tabbar tabbox button:hover {
+  background-color: #3c3035;
+  color: #e8a0b8;
+}

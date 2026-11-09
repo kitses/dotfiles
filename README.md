@@ -14,12 +14,13 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 
 ## Terminals
 
-- [kitty](kitty/)
 - [foot](foot/)
+- [Ghostty](ghostty/)
 
 ### Deprecated
 
 - [Alacritty](alacritty/)
+- [kitty](kitty/)
 
 ## Window Managers
 
