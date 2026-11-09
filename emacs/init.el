@@ -2,10 +2,17 @@
 
 (setq custom-file (expand-file-name "config.el" user-emacs-directory))
 
-(setq straight-use-package-by-default t)
+;;; packages
+(require 'package)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                         ("melpa" . "https://melpa.org/packages/")))
+(require 'use-package)
+(setq use-package-always-ensure t)
 
 ;;; built-in settings
 (use-package emacs
+  :ensure nil
   :init
   (setq make-backup-files nil
 	auto-save-default nil
@@ -16,9 +23,9 @@
 
   ;; shut up
   (let ((busy nil)
-	(buffers '(("*Messages*" . " *Messages*")
-                   ("*Completions*" . " *Completions*")
-                   ("*straight-process*" . " *straight-process*"))))
+	(buffers '(
+		   ("*Messages*" . " *Messages*")
+		   ("*Completions*" . " *Completions*"))))
     (let ((f (lambda ()
                (unless busy
 		 (setq busy t)
@@ -40,7 +47,7 @@
 	(expand-file-name "wordlist" user-emacs-directory))
 
   ;; appearance
-  (add-to-list 'default-frame-alist '(font . "Input Mono-8"))
+  (add-to-list 'default-frame-alist '(font . "Iosevka-10"))
   (column-number-mode)
   (setq-default display-line-numbers-width 3)
   (setq-default display-line-numbers-grow-only t)
@@ -50,7 +57,8 @@
               (when (and (buffer-file-name)
                          (not (derived-mode-p 'pdf-view-mode)))
                 (display-line-numbers-mode 1)
-                (buffer-face-set '(:height 100)))))
+					; (buffer-face-set '(:height 120))
+		)))
 
   ;; binds
   :bind
@@ -79,6 +87,7 @@
   :hook (after-init . vertico-mode))
 
 (use-package savehist
+  :ensure nil
   :hook (after-init . savehist-mode))
 
 (use-package orderless
@@ -174,7 +183,7 @@
   (setq magit-bury-buffer-function
 	(lambda (_) (mapc #'kill-buffer (magit-mode-get-buffers)))))
 
-(use-package eat
+(use-package ghostel
   :defer t)
 
 (use-package htmlize
