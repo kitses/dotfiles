@@ -20,8 +20,8 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 
 ### Deprecated
 
-- [Alacritty](alacritty/)
-- [kitty](kitty/)
+- [Alacritty](deprecated/alacritty/)
+- [kitty](deprecated/kitty/)
 
 ## Window Managers
 
