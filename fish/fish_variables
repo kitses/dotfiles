@@ -1,3 +1,5 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export DOTNET_CLI_TELEMETRY_OPTOUT:1
 SETUVAR __fish_initialized:4300
+SETUVAR fish_greeting:\x1d
