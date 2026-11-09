@@ -16,6 +16,7 @@ Infrequently updated and fragmented. Complaints encouraged for us to get our act
 
 - [foot](foot/)
 - [Ghostty](ghostty/)
+- [WezTerm](wezterm/)
 
 ### Deprecated
 
